@@ -1,0 +1,54 @@
+{
+  "schemaVersion": 1,
+  "id": "motherlode-base",
+  "version": "${version}",
+
+  "name": "Motherlode Base",
+  "description": "This mod provides some utility features to make developing Motherlode easier. It does not add any content.",
+  "authors": [
+    "Team Motherlode"
+  ],
+  "contact": {
+    "sources": "https://github.com/TeamMotherlode/motherlode-base",
+    "issues": "https://github.com/TeamMotherlode/motherlode-base/issues"
+  },
+
+  "license": "GNU Lesser General Public License Version 2.1 or later",
+  "icon": "assets/motherlode-base/icon.png",
+
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "motherlode.base.MotherlodeBase"
+    ],
+    "motherlode:init": [
+      "motherlode.base.Motherlode"
+    ],
+    "client": [
+      "motherlode.base.MotherlodeClient"
+    ],
+    "server": [
+      "motherlode.base.MotherlodeBase"
+    ]
+  },
+  "mixins": [
+    "motherlode-base.mixins.json"
+  ],
+
+  "depends": {
+    "fabricloader": ">=0.7.4",
+    "fabric": "*",
+    "minecraft": "*",
+    "motherlode-base": "*"
+  },
+  "suggests": {
+  },
+  "custom": {
+    "modmenu": {
+      "parent": "motherlode",
+      "badges": [
+        "library"
+      ]
+    }
+  }
+}
