@@ -24,7 +24,7 @@ import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.util.Identifier;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
-import motherlode.base.Motherlode;
+import motherlode.base.api.Motherlode;
 import motherlode.base.api.Registerable;
 import motherlode.base.api.assets.CommonAssets;
 import motherlode.base.api.assets.CommonData;

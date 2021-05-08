@@ -1,7 +1,7 @@
 package motherlode.base.api.assets;
 
 import net.minecraft.util.Identifier;
-import motherlode.base.Motherlode;
+import motherlode.base.api.Motherlode;
 
 /**
  * Assets and data can be registered using this interface.

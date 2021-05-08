@@ -12,7 +12,7 @@ import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.FeatureConfig;
 import net.minecraft.world.gen.feature.OreFeatureConfig;
 import net.minecraft.world.gen.feature.StructureFeature;
-import motherlode.base.Motherlode;
+import motherlode.base.api.Motherlode;
 
 /**
  * Using this interface, one can more easily create and register {@link ConfiguredFeature}s, and add them to world generation.
@@ -146,7 +146,7 @@ public interface FeaturesManager {
      * @return The {@link RegistryKey} for the {@code ConfiguredFeature} created and registered by this method.
      */
     default RegistryKey<ConfiguredFeature<?, ?>> addOre(Identifier id, OreTarget target, BlockState state, int veinSize, int veinsPerChunk, YOffset minY, YOffset maxY) {
-        return this.addOre(id, target, state, veinSize, f -> f.rangeOf(minY, maxY).repeat(veinsPerChunk).spreadHorizontally());
+        return this.addOre(id, target, state, veinSize, f -> f.method_36296(minY, maxY).repeat(veinsPerChunk).spreadHorizontally());
     }
 
     /**

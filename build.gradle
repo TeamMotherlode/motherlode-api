@@ -1,7 +1,7 @@
 plugins {
-	id 'fabric-loom' version '0.7-SNAPSHOT'
-	id 'checkstyle'
-	id 'maven-publish'
+    id 'fabric-loom' version '0.7-SNAPSHOT'
+    id 'checkstyle'
+    id 'maven-publish'
 }
 
 sourceCompatibility = JavaVersion.VERSION_1_8
@@ -12,70 +12,70 @@ version = "$project.mod_version+$project.minecraft_version"
 group = project.maven_group
 
 repositories {
-	maven { url 'https://jitpack.io' }
+    maven { url 'https://jitpack.io' }
 }
 
 dependencies {
-	// To change the versions see the gradle.properties file
-	minecraft "com.mojang:minecraft:${project.minecraft_version}"
-	mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
-	modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
+    // To change the versions see the gradle.properties file
+    minecraft "com.mojang:minecraft:${project.minecraft_version}"
+    mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
+    modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
 
-	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
+    modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 
-	modApi "com.github.natanfudge:artifice:$project.artifice_version"
-	include "com.github.natanfudge:artifice:$project.artifice_version"
+    modApi "com.github.natanfudge:artifice:$project.artifice_version"
+    include "com.github.natanfudge:artifice:$project.artifice_version"
 }
 
 processResources {
-	inputs.property 'version', project.version
+    inputs.property 'version', project.version
 
-	filesMatching('fabric.mod.json') {
-		expand 'version': project.version
-	}
+    filesMatching('fabric.mod.json') {
+        expand 'version': project.version
+    }
 }
 
 tasks.withType(JavaCompile).configureEach {
-	it.options.encoding = 'UTF-8'
+    it.options.encoding = 'UTF-8'
 
-	def targetVersion = 8
-	if (JavaVersion.current().isJava9Compatible()) {
-		 it.options.release = targetVersion
-	}
+    def targetVersion = 8
+    if (JavaVersion.current().isJava9Compatible()) {
+        it.options.release = targetVersion
+    }
 }
 
 java {
-	withSourcesJar()
+    withSourcesJar()
 }
 
 checkstyle {
-        configFile = rootProject.file('checkstyle.xml')
-        toolVersion = '8.31'
+    configFile = rootProject.file('checkstyle.xml')
+    toolVersion = '8.31'
 }
 
 jar {
-	from 'LICENSE'
+    from 'LICENSE'
 }
 
 // configure the maven publication
 publishing {
-	publications {
-		mavenJava(MavenPublication) {
-			// add all the jars that should be included when publishing to maven
-			artifact(remapJar) {
-				builtBy remapJar
-			}
-			artifact(sourcesJar) {
-				builtBy remapSourcesJar
-			}
-		}
-	}
+    publications {
+        mavenJava(MavenPublication) {
+            // add all the jars that should be included when publishing to maven
+            artifact(remapJar) {
+                builtBy remapJar
+            }
+            artifact(sourcesJar) {
+                builtBy remapSourcesJar
+            }
+        }
+    }
 
-	// See https://docs.gradle.org/current/userguide/publishing_maven.html for information on how to set up publishing.
-	repositories {
-		maven {
+    // See https://docs.gradle.org/current/userguide/publishing_maven.html for information on how to set up publishing.
+    repositories {
+        maven {
             name = 'GitHubPackages'
-            url = uri('https://maven.pkg.github.com/TeamMotherlode/motherlode-base')
+            url = uri('https://maven.pkg.github.com/TeamMotherlode/motherlode-api')
             credentials {
                 username = project.findProperty('gpr.user') ?: System.getenv('GITHUB_USERNAME')
                 password = project.findProperty('gpr.key') ?: System.getenv('GITHUB_TOKEN')

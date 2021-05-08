@@ -1,20 +1,20 @@
 {
   "schemaVersion": 1,
-  "id": "motherlode-base",
+  "id": "motherlode-api",
   "version": "${version}",
 
-  "name": "Motherlode Base",
+  "name": "Motherlode API",
   "description": "This mod provides some utility features to make developing Motherlode easier. It does not add any content.",
   "authors": [
     "Team Motherlode"
   ],
   "contact": {
-    "sources": "https://github.com/TeamMotherlode/motherlode-base",
-    "issues": "https://github.com/TeamMotherlode/motherlode-base/issues"
+    "sources": "https://github.com/TeamMotherlode/motherlode-api",
+    "issues": "https://github.com/TeamMotherlode/motherlode-api/issues"
   },
 
   "license": "GNU Lesser General Public License Version 2.1 or later",
-  "icon": "assets/motherlode-base/icon.png",
+  "icon": "assets/motherlode-api/icon.png",
 
   "environment": "*",
   "entrypoints": {
@@ -22,7 +22,7 @@
       "motherlode.base.MotherlodeBase"
     ],
     "motherlode:init": [
-      "motherlode.base.Motherlode"
+      "motherlode.base.api.Motherlode"
     ],
     "client": [
       "motherlode.base.MotherlodeClient"
@@ -32,14 +32,13 @@
     ]
   },
   "mixins": [
-    "motherlode-base.mixins.json"
+    "motherlode-api.mixins.json"
   ],
 
   "depends": {
     "fabricloader": ">=0.7.4",
     "fabric": "*",
-    "minecraft": "*",
-    "motherlode-base": "*"
+    "minecraft": "*"
   },
   "suggests": {
   },

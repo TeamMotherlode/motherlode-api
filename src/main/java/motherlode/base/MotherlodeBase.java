@@ -3,10 +3,12 @@ package motherlode.base;
 import net.fabricmc.api.DedicatedServerModInitializer;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.loader.api.FabricLoader;
+import motherlode.base.api.Motherlode;
+import motherlode.base.api.MotherlodeInitEvents;
 import org.apache.logging.log4j.Level;
 
 public class MotherlodeBase implements ModInitializer, DedicatedServerModInitializer {
-    public static final String MODID = "motherlode-base";
+    public static final String MODID = "motherlode-api";
 
     private static boolean moduleInitDone;
 

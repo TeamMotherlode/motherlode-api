@@ -4,7 +4,7 @@ import java.util.Optional;
 import java.util.function.BooleanSupplier;
 import java.util.function.Supplier;
 import net.minecraft.util.Identifier;
-import motherlode.base.Motherlode;
+import motherlode.base.api.Motherlode;
 import motherlode.base.api.assets.AssetProcessor;
 import motherlode.base.api.assets.DataProcessor;
 

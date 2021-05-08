@@ -2,7 +2,7 @@ package motherlode.base.api.woodtype;
 
 import java.util.function.Function;
 import net.minecraft.util.Identifier;
-import motherlode.base.Motherlode;
+import motherlode.base.api.Motherlode;
 import motherlode.base.api.assets.AssetProcessor;
 import motherlode.base.api.assets.CommonAssets;
 

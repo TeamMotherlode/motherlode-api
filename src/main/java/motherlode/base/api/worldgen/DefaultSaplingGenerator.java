@@ -6,7 +6,7 @@ import net.minecraft.block.sapling.SaplingGenerator;
 import net.minecraft.util.Identifier;
 import net.minecraft.world.gen.feature.ConfiguredFeature;
 import net.minecraft.world.gen.feature.TreeFeatureConfig;
-import motherlode.base.Motherlode;
+import motherlode.base.api.Motherlode;
 import org.jetbrains.annotations.Nullable;
 
 public class DefaultSaplingGenerator extends SaplingGenerator {

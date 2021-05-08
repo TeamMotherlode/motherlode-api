@@ -3,7 +3,7 @@ package motherlode.base.api.assets;
 import java.util.function.BiFunction;
 import java.util.function.Function;
 import net.minecraft.util.Identifier;
-import motherlode.base.Motherlode;
+import motherlode.base.api.Motherlode;
 import com.google.gson.JsonObject;
 import com.swordglowsblue.artifice.api.builder.assets.BlockStateBuilder;
 import com.swordglowsblue.artifice.api.builder.assets.ModelBuilder;

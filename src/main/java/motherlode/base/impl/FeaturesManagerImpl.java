@@ -29,14 +29,14 @@ public class FeaturesManagerImpl implements FeaturesManager {
 
     @Override
     public RegistryKey<ConfiguredFeature<?, ?>> registerConfiguredFeatureKey(Identifier id, ConfiguredFeature<?, ?> configuredFeature) {
-        RegistryKey<ConfiguredFeature<?, ?>> key = RegistryKey.of(Registry.CONFIGURED_FEATURE_WORLDGEN, id);
+        RegistryKey<ConfiguredFeature<?, ?>> key = RegistryKey.of(Registry.CONFIGURED_FEATURE_KEY, id);
         Registry.register(BuiltinRegistries.CONFIGURED_FEATURE, key.getValue(), configuredFeature);
         return key;
     }
 
     @Override
     public RegistryKey<ConfiguredStructureFeature<?, ?>> registerConfiguredStructureFeatureKey(Identifier id, ConfiguredStructureFeature<?, ?> configuredStructureFeature) {
-        RegistryKey<ConfiguredStructureFeature<?, ?>> key = RegistryKey.of(Registry.CONFIGURED_STRUCTURE_FEATURE_WORLDGEN, id);
+        RegistryKey<ConfiguredStructureFeature<?, ?>> key = RegistryKey.of(Registry.CONFIGURED_STRUCTURE_FEATURE_KEY, id);
         Registry.register(BuiltinRegistries.CONFIGURED_STRUCTURE_FEATURE, key.getValue(), configuredStructureFeature);
         return key;
     }

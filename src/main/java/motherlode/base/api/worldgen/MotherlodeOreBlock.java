@@ -4,7 +4,7 @@ import java.util.function.Function;
 import net.minecraft.block.Material;
 import net.minecraft.block.OreBlock;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.math.IntRange;
+import net.minecraft.util.math.intprovider.UniformIntProvider;
 import net.minecraft.world.gen.YOffset;
 import net.minecraft.world.gen.feature.ConfiguredFeature;
 import net.minecraft.world.gen.feature.OreFeatureConfig;
@@ -15,7 +15,7 @@ import motherlode.base.api.assets.DataProcessor;
 import com.swordglowsblue.artifice.api.ArtificeResourcePack;
 
 public class MotherlodeOreBlock extends OreBlock implements DataProcessor {
-    private static final IntRange NULL_INT_RANGE = IntRange.between(0, 0);
+    private static final UniformIntProvider NULL_INT_PROVIDER = UniformIntProvider.create(0, 0);
 
     private final int veinSize;
     private final Function<ConfiguredFeature<OreFeatureConfig, ?>, ConfiguredFeature<?, ?>> decorators;
@@ -34,28 +34,28 @@ public class MotherlodeOreBlock extends OreBlock implements DataProcessor {
 
     @Deprecated
     public MotherlodeOreBlock(OreTarget target, int veinSize, int veinsPerChunk, int minY, int maxY, int miningLevel, String mineral) {
-        this(target, NULL_INT_RANGE, veinSize, veinsPerChunk, minY, maxY, miningLevel, mineral);
+        this(target, NULL_INT_PROVIDER, veinSize, veinsPerChunk, minY, maxY, miningLevel, mineral);
     }
 
     public MotherlodeOreBlock(OreTarget target, int veinSize, int veinsPerChunk, YOffset minY, YOffset maxY, int miningLevel, String mineral) {
-        this(target, NULL_INT_RANGE, veinSize, veinsPerChunk, minY, maxY, miningLevel, mineral);
+        this(target, NULL_INT_PROVIDER, veinSize, veinsPerChunk, minY, maxY, miningLevel, mineral);
     }
 
     @Deprecated
-    public MotherlodeOreBlock(OreTarget target, IntRange experienceRange, int veinSize, int veinsPerChunk, int minY, int maxY, int miningLevel, String mineral) {
-        this(target, experienceRange, veinSize, veinsPerChunk, YOffset.fixed(minY), YOffset.fixed(maxY), miningLevel, mineral);
+    public MotherlodeOreBlock(OreTarget target, UniformIntProvider experience, int veinSize, int veinsPerChunk, int minY, int maxY, int miningLevel, String mineral) {
+        this(target, experience, veinSize, veinsPerChunk, YOffset.fixed(minY), YOffset.fixed(maxY), miningLevel, mineral);
     }
 
-    public MotherlodeOreBlock(OreTarget target, IntRange experienceRange, int veinSize, int veinsPerChunk, YOffset minY, YOffset maxY, int miningLevel, String mineral) {
-        this(target, experienceRange, veinSize, f -> f.rangeOf(minY, maxY).spreadHorizontally().repeat(veinsPerChunk), miningLevel, mineral);
+    public MotherlodeOreBlock(OreTarget target, UniformIntProvider experience, int veinSize, int veinsPerChunk, YOffset minY, YOffset maxY, int miningLevel, String mineral) {
+        this(target, experience, veinSize, f -> f.method_36296(minY, maxY).spreadHorizontally().repeat(veinsPerChunk), miningLevel, mineral);
     }
 
     public MotherlodeOreBlock(OreTarget target, int veinSize, Function<ConfiguredFeature<OreFeatureConfig, ?>, ConfiguredFeature<?, ?>> decorators, int miningLevel, String mineral) {
-        this(target, NULL_INT_RANGE, veinSize, decorators, miningLevel, mineral);
+        this(target, NULL_INT_PROVIDER, veinSize, decorators, miningLevel, mineral);
     }
 
-    public MotherlodeOreBlock(OreTarget target, IntRange experienceRange, int veinSize, Function<ConfiguredFeature<OreFeatureConfig, ?>, ConfiguredFeature<?, ?>> decorators, int miningLevel, String mineral) {
-        super(FabricBlockSettings.of(Material.STONE).strength(Math.min(3f, miningLevel), Math.min(3f, miningLevel + 1)).requiresTool().breakByTool(FabricToolTags.PICKAXES, miningLevel), experienceRange);
+    public MotherlodeOreBlock(OreTarget target, UniformIntProvider experience, int veinSize, Function<ConfiguredFeature<OreFeatureConfig, ?>, ConfiguredFeature<?, ?>> decorators, int miningLevel, String mineral) {
+        super(FabricBlockSettings.of(Material.STONE).strength(Math.min(3f, miningLevel), Math.min(3f, miningLevel + 1)).requiresTool().breakByTool(FabricToolTags.PICKAXES, miningLevel), experience);
 
         this.veinSize = veinSize;
         this.decorators = decorators;
