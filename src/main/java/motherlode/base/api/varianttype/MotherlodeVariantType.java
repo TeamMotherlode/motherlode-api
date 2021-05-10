@@ -22,14 +22,11 @@ public abstract class MotherlodeVariantType<T, S extends MotherlodeVariantType<T
     protected abstract void registerOnClient(Identifier id);
 
     @Override
-    public S register() {
-        if (!this.isWithoutBase()) {
-            Motherlode.getAssetsManager().addAssets(this.getBaseId(), this);
-            Motherlode.getAssetsManager().addData(this.getBaseId(), this);
-            Motherlode.registerOnClient(this.getBaseId(), this::registerOnClient);
-        }
-
-        return super.register();
+    protected void registerBase() {
+        super.registerBase();
+        Motherlode.getAssetsManager().addAssets(this.getBaseId(), this);
+        Motherlode.getAssetsManager().addData(this.getBaseId(), this);
+        Motherlode.registerOnClient(this.getBaseId(), this::registerOnClient);
     }
 
     @Deprecated

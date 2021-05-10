@@ -3,7 +3,7 @@ package motherlode.base.impl;
 import java.util.HashMap;
 import java.util.Map;
 import net.minecraft.block.Block;
-import motherlode.base.api.woodtype.StrippedBlockMap;
+import motherlode.base.api.varianttypes.wood.StrippedBlockMap;
 
 public class StrippedBlockMapImpl implements StrippedBlockMap {
     public static final StrippedBlockMapImpl INSTANCE = new StrippedBlockMapImpl();

@@ -83,7 +83,7 @@ public class MotherlodeOreBlock extends OreBlock implements DataProcessor {
 
         CommonData.BLOCK_TAG.apply(commonId).accept(pack, id);
 
-        Identifier mineral = new Identifier(id.getNamespace(), this.mineral);
+        /* Identifier mineral = new Identifier(id.getNamespace(), this.mineral);
 
         pack.addSmeltingRecipe(new Identifier(id.getNamespace(), mineral.getPath() + "_smelting"), recipe -> recipe
             .ingredientTag(commonId)
@@ -95,6 +95,6 @@ public class MotherlodeOreBlock extends OreBlock implements DataProcessor {
             .ingredientTag(commonId)
             .result(mineral)
             .experience(1)
-            .cookingTime(100));
+            .cookingTime(100)); */
     }
 }
