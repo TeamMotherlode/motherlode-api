@@ -36,7 +36,7 @@ import motherlode.base.mixin.BlocksAccessor;
 import com.swordglowsblue.artifice.api.ArtificeResourcePack;
 
 /**
- * JavaDoc planned.
+ * Variant type that adds blocks required for an overworld wood type.
  */
 public class WoodType extends MotherlodeVariantType<Block, WoodType> {
     private static final Item.Settings BUILDING_BLOCKS = new Item.Settings().group(ItemGroup.BUILDING_BLOCKS);

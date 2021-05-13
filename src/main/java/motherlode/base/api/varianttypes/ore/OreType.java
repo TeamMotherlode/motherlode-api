@@ -2,6 +2,7 @@ package motherlode.base.api.varianttypes.ore;
 
 import java.util.function.UnaryOperator;
 import net.minecraft.block.Block;
+import net.minecraft.block.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.util.Identifier;
@@ -14,9 +15,17 @@ import motherlode.base.api.varianttype.MotherlodeVariantType;
 import com.swordglowsblue.artifice.api.ArtificeResourcePack;
 
 /**
- * JavaDoc planned.
+ * Variant type that adds blocks and items for an overworld ore type.
  */
 public class OreType extends MotherlodeVariantType<Object, OreType> {
+    public static final OreType IRON = new OreType(new Identifier("minecraft", "iron"), Blocks.IRON_ORE, Blocks.DEEPSLATE_IRON_ORE).withoutBase().register();
+    public static final OreType COAL = new OreType(new Identifier("minecraft", "coal"), Blocks.COAL_ORE, Blocks.DEEPSLATE_COAL_ORE, "coal").withoutBase().register();
+    public static final OreType COPPER = new OreType(new Identifier("minecraft", "copper"), Blocks.COPPER_ORE, Blocks.DEEPSLATE_COPPER_ORE).withoutBase().register();
+    public static final OreType GOLD = new OreType(new Identifier("minecraft", "gold"), Blocks.GOLD_ORE, Blocks.DEEPSLATE_GOLD_ORE).withoutBase().register();
+    public static final OreType REDSTONE = new OreType(new Identifier("minecraft", "redstone"), Blocks.REDSTONE_ORE, Blocks.DEEPSLATE_REDSTONE_ORE, "redstone_dust").withoutBase().register();
+    public static final OreType LAPIS_LAZULI = new OreType(new Identifier("minecraft", "lapis_lazuli"), Blocks.LAPIS_ORE, Blocks.DEEPSLATE_LAPIS_ORE, "lapis_lazuli").withoutBase().register();
+    public static final OreType DIAMOND = new OreType(new Identifier("minecraft", "diamond"), Blocks.DIAMOND_ORE, Blocks.DEEPSLATE_DIAMOND_ORE, "diamond").withoutBase().register();
+
     private final Block stoneOreBlock;
     private final Block deepslateOreBlock;
     private Item material;
