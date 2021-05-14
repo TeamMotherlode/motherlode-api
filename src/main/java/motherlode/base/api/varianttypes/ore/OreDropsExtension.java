@@ -83,7 +83,7 @@ public class OreDropsExtension implements MotherlodeVariantType.Extension<Object
         MINERAL, THEMSELVES;
 
         public Identifier choose(Identifier mineralId, Identifier oreId) {
-            switch(this) {
+            switch (this) {
                 case MINERAL:
                     return mineralId;
                 case THEMSELVES:

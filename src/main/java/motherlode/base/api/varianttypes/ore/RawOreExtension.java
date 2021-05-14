@@ -100,7 +100,6 @@ public class RawOreExtension implements MotherlodeVariantType.Extension<Object, 
 
     @Override
     public void registerOnClient(Identifier id) {
-
     }
 
     public Item getRawOreItem() {
