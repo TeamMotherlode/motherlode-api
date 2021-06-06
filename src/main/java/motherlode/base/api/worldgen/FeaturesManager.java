@@ -146,7 +146,7 @@ public interface FeaturesManager {
      * @return The {@link RegistryKey} for the {@code ConfiguredFeature} created and registered by this method.
      */
     default RegistryKey<ConfiguredFeature<?, ?>> addOre(Identifier id, OreTarget target, BlockState state, int veinSize, int veinsPerChunk, YOffset minY, YOffset maxY) {
-        return this.addOre(id, target, state, veinSize, f -> f.method_36296(minY, maxY).repeat(veinsPerChunk).spreadHorizontally());
+        return this.addOre(id, target, state, veinSize, f -> f.uniformRange(minY, maxY).repeat(veinsPerChunk).spreadHorizontally());
     }
 
     /**
