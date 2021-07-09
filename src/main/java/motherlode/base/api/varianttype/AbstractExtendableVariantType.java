@@ -7,6 +7,7 @@ import java.util.Optional;
 import java.util.function.BooleanSupplier;
 import java.util.function.Supplier;
 import net.minecraft.util.Identifier;
+import org.jetbrains.annotations.ApiStatus;
 
 /**
  * JavaDoc planned.
@@ -59,7 +60,7 @@ public abstract class AbstractExtendableVariantType<T, S extends AbstractExtenda
     @Override
     public S register() {
         if (!withoutBase) {
-            this.registerBase(new Identifier(this.baseNamespace, this.name));
+            this.registerBase();
             this.withoutBase();
         }
 
@@ -73,6 +74,11 @@ public abstract class AbstractExtendableVariantType<T, S extends AbstractExtenda
         }
 
         return getThis();
+    }
+
+    @ApiStatus.OverrideOnly
+    protected void registerBase() {
+        this.registerBase(new Identifier(this.baseNamespace, this.name));
     }
 
     @Override
