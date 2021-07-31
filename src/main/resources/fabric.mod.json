@@ -36,9 +36,10 @@
   ],
 
   "depends": {
-    "fabricloader": ">=0.7.4",
+    "fabricloader": ">=0.11.3",
     "fabric": "*",
-    "minecraft": "*"
+    "minecraft": "*",
+    "java": ">=16"
   },
   "suggests": {
   },

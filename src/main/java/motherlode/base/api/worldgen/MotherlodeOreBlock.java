@@ -47,7 +47,7 @@ public class MotherlodeOreBlock extends OreBlock implements DataProcessor {
     }
 
     public MotherlodeOreBlock(OreTarget target, UniformIntProvider experience, int veinSize, int veinsPerChunk, YOffset minY, YOffset maxY, int miningLevel, String mineral) {
-        this(target, experience, veinSize, f -> f.method_36296(minY, maxY).spreadHorizontally().repeat(veinsPerChunk), miningLevel, mineral);
+        this(target, experience, veinSize, f -> f.uniformRange(minY, maxY).spreadHorizontally().repeat(veinsPerChunk), miningLevel, mineral);
     }
 
     public MotherlodeOreBlock(OreTarget target, int veinSize, Function<ConfiguredFeature<OreFeatureConfig, ?>, ConfiguredFeature<?, ?>> decorators, int miningLevel, String mineral) {
