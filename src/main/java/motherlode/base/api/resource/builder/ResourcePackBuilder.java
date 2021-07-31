@@ -3,9 +3,12 @@ package motherlode.base.api.resource.builder;
 import net.minecraft.util.Identifier;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import com.swordglowsblue.artifice.api.builder.assets.ModelBuilder;
-import com.swordglowsblue.artifice.api.util.Processor;
+import motherlode.base.api.Processor;
+import motherlode.base.api.resource.builder.assets.ModelBuilder;
 
+/**
+ * Passed to resource construction callbacks to register client-side resources.
+ */
 @Environment(EnvType.CLIENT)
 public interface ResourcePackBuilder {
     /**

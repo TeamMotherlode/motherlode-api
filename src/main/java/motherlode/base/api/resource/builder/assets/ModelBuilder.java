@@ -4,7 +4,6 @@ import net.minecraft.util.Identifier;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import motherlode.base.api.Processor;
-import com.swordglowsblue.artifice.api.builder.assets.ModelElementBuilder;
 
 /**
  * Builder for a model file ({@code namespace:models/block|item/model_id.json}).
@@ -58,10 +57,10 @@ public interface ModelBuilder {
     /**
      * Add a property override to this model. Only applicable for item models.
      *
-     * @param settings A callback which will be passed a {@link ModelBuilder.Override}.
+     * @param settings A callback which will be passed a {@link PropertyOverride}.
      * @return this
      */
-    ModelBuilder override(Processor<Override> settings);
+    ModelBuilder override(Processor<PropertyOverride> settings);
 
     /**
      * Builder for model display settings.
@@ -107,7 +106,7 @@ public interface ModelBuilder {
      * @see ModelBuilder
      */
     @Environment(EnvType.CLIENT)
-    interface Override {
+    interface PropertyOverride {
         /**
          * Set the required value of the given property.
          * Calling this multiple times will require all properties to match.
@@ -117,7 +116,7 @@ public interface ModelBuilder {
          * @return this
          * @see <a href="https://minecraft.gamepedia.com/Model#Item_tags">Minecraft Wiki</a>
          */
-        Override predicate(String name, int value);
+        PropertyOverride predicate(String name, int value);
 
         /**
          * Set the model to be used instead of this one if the predicate matches.
@@ -125,6 +124,6 @@ public interface ModelBuilder {
          * @param id The model id ({@code namespace:block|item/model_id}).
          * @return this
          */
-        ModelBuilder.Override model(Identifier id);
+        PropertyOverride model(Identifier id);
     }
 }
