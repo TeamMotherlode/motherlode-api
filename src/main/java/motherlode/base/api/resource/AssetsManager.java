@@ -1,4 +1,4 @@
-package motherlode.base.api.assets;
+package motherlode.base.api.resource;
 
 import net.minecraft.util.Identifier;
 import motherlode.base.api.Motherlode;

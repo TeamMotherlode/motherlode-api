@@ -5,8 +5,8 @@ import java.util.function.BooleanSupplier;
 import java.util.function.Supplier;
 import net.minecraft.util.Identifier;
 import motherlode.base.api.Motherlode;
-import motherlode.base.api.assets.AssetProcessor;
-import motherlode.base.api.assets.DataProcessor;
+import motherlode.base.api.resource.AssetProcessor;
+import motherlode.base.api.resource.DataProcessor;
 
 /**
  * JavaDoc planned.

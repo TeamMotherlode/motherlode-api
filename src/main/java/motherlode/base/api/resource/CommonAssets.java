@@ -1,4 +1,4 @@
-package motherlode.base.api.assets;
+package motherlode.base.api.resource;
 
 import java.util.function.BiFunction;
 import java.util.function.Function;

@@ -3,8 +3,8 @@ package motherlode.base.api.varianttypes.wood;
 import java.util.function.Function;
 import net.minecraft.util.Identifier;
 import motherlode.base.api.Motherlode;
-import motherlode.base.api.assets.AssetProcessor;
-import motherlode.base.api.assets.CommonAssets;
+import motherlode.base.api.resource.AssetProcessor;
+import motherlode.base.api.resource.CommonAssets;
 
 public class WoodTypeAssets {
     private static final boolean[] BOOLEAN = new boolean[] { true, false };
