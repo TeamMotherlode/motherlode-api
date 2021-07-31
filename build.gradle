@@ -48,7 +48,7 @@ java {
 
 checkstyle {
     configFile = rootProject.file('checkstyle.xml')
-    toolVersion = '8.31'
+    toolVersion = '8.45'
 }
 
 jar {

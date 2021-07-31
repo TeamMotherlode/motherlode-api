@@ -4,7 +4,6 @@ import net.minecraft.util.Identifier;
 import motherlode.base.api.Motherlode;
 import motherlode.base.api.assets.CommonData;
 import motherlode.base.api.varianttype.MotherlodeVariantType;
-import motherlode.base.api.varianttypes.ore.OreDropsExtension.Drop;
 import com.swordglowsblue.artifice.api.ArtificeResourcePack;
 import com.swordglowsblue.artifice.api.builder.TypedJsonBuilder;
 
