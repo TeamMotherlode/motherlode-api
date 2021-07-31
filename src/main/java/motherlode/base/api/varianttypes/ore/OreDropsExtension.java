@@ -4,6 +4,7 @@ import net.minecraft.util.Identifier;
 import motherlode.base.api.Motherlode;
 import motherlode.base.api.assets.CommonData;
 import motherlode.base.api.varianttype.MotherlodeVariantType;
+import motherlode.base.api.varianttypes.ore.OreDropsExtension.Drop;
 import com.swordglowsblue.artifice.api.ArtificeResourcePack;
 import com.swordglowsblue.artifice.api.builder.TypedJsonBuilder;
 
@@ -83,14 +84,10 @@ public class OreDropsExtension implements MotherlodeVariantType.Extension<Object
         MINERAL, THEMSELVES;
 
         public Identifier choose(Identifier mineralId, Identifier oreId) {
-            switch (this) {
-                case MINERAL:
-                    return mineralId;
-                case THEMSELVES:
-                    return oreId;
-            }
-
-            return oreId;
+            return switch (this) {
+                case MINERAL -> mineralId;
+                case THEMSELVES -> oreId;
+            };
         }
     }
 }

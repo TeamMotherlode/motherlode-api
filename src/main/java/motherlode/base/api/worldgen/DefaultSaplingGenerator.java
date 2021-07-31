@@ -20,7 +20,7 @@ public class DefaultSaplingGenerator extends SaplingGenerator {
     }
 
     @Override
-    protected @Nullable ConfiguredFeature<TreeFeatureConfig, ?> createTreeFeature(Random random, boolean bl) {
+    protected @Nullable ConfiguredFeature<TreeFeatureConfig, ?> getTreeFeature(Random random, boolean bl) {
         return this.configuredFeature;
     }
 }
