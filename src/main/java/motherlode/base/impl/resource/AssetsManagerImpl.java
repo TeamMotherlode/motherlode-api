@@ -1,4 +1,4 @@
-package motherlode.base.impl.assets;
+package motherlode.base.impl.resource;
 
 import java.util.ArrayList;
 import java.util.List;

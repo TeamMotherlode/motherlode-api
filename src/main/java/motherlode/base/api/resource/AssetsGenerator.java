@@ -1,6 +1,6 @@
 package motherlode.base.api.resource;
 
-import com.swordglowsblue.artifice.api.ArtificeResourcePack;
+import motherlode.base.api.resource.builder.ResourcePackBuilder;
 
 @FunctionalInterface
 public interface AssetsGenerator {
@@ -9,5 +9,16 @@ public interface AssetsGenerator {
      *
      * @param pack Resource pack builder to register assets to.
      */
-    void accept(ArtificeResourcePack.ClientResourcePackBuilder pack);
+    void accept(ResourcePackBuilder pack);
+
+    /**
+     * Calls the {@link #accept} method and returns the given resource pack builder.
+     *
+     * @param pack Resource pack builder to register assets to.
+     * @return The given resource pack builder.
+     */
+    default ResourcePackBuilder process(ResourcePackBuilder pack) {
+        this.accept(pack);
+        return pack;
+    }
 }

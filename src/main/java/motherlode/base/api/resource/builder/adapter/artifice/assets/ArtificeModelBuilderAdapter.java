@@ -2,10 +2,19 @@ package motherlode.base.api.resource.builder.adapter.artifice.assets;
 
 import net.minecraft.util.Identifier;
 import motherlode.base.api.Processor;
+import motherlode.base.api.resource.builder.JsonBuilder;
+import motherlode.base.api.resource.builder.adapter.artifice.ArtificeJsonBuilderAdapter;
 import motherlode.base.api.resource.builder.assets.ModelBuilder;
 import motherlode.base.api.resource.builder.assets.ModelElementBuilder;
 
-public record ArtificeModelBuilderAdapter(com.swordglowsblue.artifice.api.builder.assets.ModelBuilder model) implements ModelBuilder {
+public record ArtificeModelBuilderAdapter(
+    com.swordglowsblue.artifice.api.builder.assets.ModelBuilder model) implements ModelBuilder {
+    @Override
+    public ModelBuilder with(Processor<JsonBuilder> json) {
+        json.accept(new ArtificeJsonBuilderAdapter(this.model));
+        return this;
+    }
+
     @Override
     public ModelBuilder parent(Identifier id) {
         this.model.parent(id);
@@ -43,7 +52,13 @@ public record ArtificeModelBuilderAdapter(com.swordglowsblue.artifice.api.builde
     }
 
     public static record ArtificeDisplayAdapter(
-        com.swordglowsblue.artifice.api.builder.assets.ModelBuilder.Display display) implements ModelBuilder.Display {
+        com.swordglowsblue.artifice.api.builder.assets.ModelBuilder.Display display) implements Display {
+        @Override
+        public Display with(Processor<JsonBuilder> json) {
+            json.accept(new ArtificeJsonBuilderAdapter(this.display));
+            return this;
+        }
+
         @Override
         public ModelBuilder.Display rotation(float x, float y, float z) {
             this.display.rotation(x, y, z);
@@ -64,7 +79,13 @@ public record ArtificeModelBuilderAdapter(com.swordglowsblue.artifice.api.builde
     }
 
     public static record ArtificeOverrideAdapter(
-        com.swordglowsblue.artifice.api.builder.assets.ModelBuilder.Override override) implements ModelBuilder.PropertyOverride {
+        com.swordglowsblue.artifice.api.builder.assets.ModelBuilder.Override override) implements PropertyOverride {
+        @Override
+        public PropertyOverride with(Processor<JsonBuilder> json) {
+            json.accept(new ArtificeJsonBuilderAdapter(this.override));
+            return this;
+        }
+
         @Override
         public PropertyOverride predicate(String name, int value) {
             this.override.predicate(name, value);

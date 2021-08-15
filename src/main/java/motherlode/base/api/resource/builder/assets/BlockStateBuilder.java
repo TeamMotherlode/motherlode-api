@@ -4,6 +4,7 @@ import net.minecraft.util.Identifier;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import motherlode.base.api.Processor;
+import motherlode.base.api.resource.builder.JsonBuilder;
 
 /**
  * Builder for a block state definition file ({@code namespace:blockstates/block_id.json}).
@@ -12,6 +13,14 @@ import motherlode.base.api.Processor;
  */
 @Environment(EnvType.CLIENT)
 public interface BlockStateBuilder {
+    /**
+     * Allows adding any JSON properties.
+     *
+     * @param json A callback which will be passed a {@link JsonBuilder}.
+     * @return this
+     */
+    BlockStateBuilder with(Processor<JsonBuilder> json);
+
     /**
      * Add a builder for the given state key.
      * Calling this multiple times for the same key will modify the existing value.
@@ -51,6 +60,14 @@ public interface BlockStateBuilder {
      */
     @Environment(EnvType.CLIENT)
     interface Variant {
+        /**
+         * Allows adding any JSON properties.
+         *
+         * @param json A callback which will be passed a {@link JsonBuilder}.
+         * @return this
+         */
+        Variant with(Processor<JsonBuilder> json);
+
         /**
          * Set the model this builder should use.
          *
@@ -103,6 +120,14 @@ public interface BlockStateBuilder {
      */
     @Environment(EnvType.CLIENT)
     interface Case {
+        /**
+         * Allows adding any JSON properties.
+         *
+         * @param json A callback which will be passed a {@link JsonBuilder}.
+         * @return this
+         */
+        Case with(Processor<JsonBuilder> json);
+
         /**
          * Set the condition for this case to be applied.
          * Calling this multiple times with different keys will require all the specified properties to match.

@@ -2,10 +2,18 @@ package motherlode.base.api.resource.builder.adapter.artifice.assets;
 
 import net.minecraft.util.Identifier;
 import motherlode.base.api.Processor;
+import motherlode.base.api.resource.builder.JsonBuilder;
+import motherlode.base.api.resource.builder.adapter.artifice.ArtificeJsonBuilderAdapter;
 import motherlode.base.api.resource.builder.assets.BlockStateBuilder;
 
 public record ArtificeBlockStateBuilderAdapter(
     com.swordglowsblue.artifice.api.builder.assets.BlockStateBuilder builder) implements BlockStateBuilder {
+    @Override
+    public BlockStateBuilder with(Processor<JsonBuilder> json) {
+        json.accept(new ArtificeJsonBuilderAdapter(this.builder));
+        return this;
+    }
+
     @Override
     public BlockStateBuilder variant(String name, Processor<Variant> settings) {
         this.builder.variant(name, variant -> settings.accept(new ArtificeVariantAdapter(variant)));
@@ -25,7 +33,12 @@ public record ArtificeBlockStateBuilderAdapter(
     }
 
     public static record ArtificeVariantAdapter(
-        com.swordglowsblue.artifice.api.builder.assets.BlockStateBuilder.Variant builder) implements BlockStateBuilder.Variant {
+        com.swordglowsblue.artifice.api.builder.assets.BlockStateBuilder.Variant builder) implements Variant {
+        @Override
+        public Variant with(Processor<JsonBuilder> json) {
+            json.accept(new ArtificeJsonBuilderAdapter(this.builder));
+            return this;
+        }
 
         @Override
         public Variant model(Identifier id) {
@@ -59,7 +72,13 @@ public record ArtificeBlockStateBuilderAdapter(
     }
 
     public static record ArtificeCaseAdapter(
-        com.swordglowsblue.artifice.api.builder.assets.BlockStateBuilder.Case builder) implements BlockStateBuilder.Case {
+        com.swordglowsblue.artifice.api.builder.assets.BlockStateBuilder.Case builder) implements Case {
+        @Override
+        public Case with(Processor<JsonBuilder> json) {
+            json.accept(new ArtificeJsonBuilderAdapter(this.builder));
+            return this;
+        }
+
         @Override
         public Case when(String name, String state) {
             this.builder.when(name, state);

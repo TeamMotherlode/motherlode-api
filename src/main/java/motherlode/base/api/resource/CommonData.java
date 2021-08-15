@@ -6,6 +6,8 @@ import motherlode.base.api.Motherlode;
 import com.swordglowsblue.artifice.api.builder.TypedJsonBuilder;
 
 public final class CommonData {
+    public static final String COMMON_NAMESPACE = "c";
+
     public static final DataProcessor DEFAULT_BLOCK_LOOT_TABLE = (pack, id) ->
         pack.addLootTable(Motherlode.id(id, name -> "blocks/" + name), table -> table
             .type(new Identifier("minecraft", "block"))
@@ -20,7 +22,8 @@ public final class CommonData {
             )
         );
 
-    public static final String COMMON_NAMESPACE = "c";
+    private CommonData() {
+    }
 
     public static final Function<Identifier, DataProcessor> ITEM_TAG = tagId -> (pack, id) ->
         pack.addItemTag(tagId, tag -> tag

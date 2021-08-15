@@ -2,7 +2,7 @@ package motherlode.base.api.resource;
 
 import java.util.Objects;
 import net.minecraft.util.Identifier;
-import com.swordglowsblue.artifice.api.ArtificeResourcePack;
+import motherlode.base.api.resource.builder.ResourcePackBuilder;
 
 @FunctionalInterface
 public interface AssetProcessor {
@@ -12,7 +12,7 @@ public interface AssetProcessor {
      * @param pack Resource pack builder to register assets to.
      * @param id   Identifier passed together with the {@code AssetProcessor}.
      */
-    void accept(ArtificeResourcePack.ClientResourcePackBuilder pack, Identifier id);
+    void accept(ResourcePackBuilder pack, Identifier id);
 
     /**
      * Calls the {@link #accept} method and returns the given resource pack builder.
@@ -21,9 +21,8 @@ public interface AssetProcessor {
      * @param id   Identifier passed together with the {@code AssetProcessor}.
      * @return The given resource pack builder.
      */
-    default ArtificeResourcePack.ClientResourcePackBuilder process(ArtificeResourcePack.ClientResourcePackBuilder pack, Identifier id) {
-
-        accept(pack, id);
+    default ResourcePackBuilder process(ResourcePackBuilder pack, Identifier id) {
+        this.accept(pack, id);
         return pack;
     }
 
@@ -37,7 +36,6 @@ public interface AssetProcessor {
         Objects.requireNonNull(before);
 
         return (pack, id) -> {
-
             before.accept(pack, id);
             this.accept(pack, id);
         };

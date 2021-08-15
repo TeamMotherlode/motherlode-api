@@ -4,9 +4,9 @@ import java.util.function.BiFunction;
 import java.util.function.Function;
 import net.minecraft.util.Identifier;
 import motherlode.base.api.Motherlode;
+import motherlode.base.api.resource.builder.assets.BlockStateBuilder;
+import motherlode.base.api.resource.builder.assets.ModelBuilder;
 import com.google.gson.JsonObject;
-import com.swordglowsblue.artifice.api.builder.assets.BlockStateBuilder;
-import com.swordglowsblue.artifice.api.builder.assets.ModelBuilder;
 
 public final class CommonAssets {
     private static final String[] facings = new String[] { "east", "north", "south", "west" };
@@ -18,6 +18,9 @@ public final class CommonAssets {
     private static final int[] models = new int[] { 1, 1, 2, 2, 0, 1, 1, 2, 2, 0 };
     private static final int[] xs = new int[] { 0, 0, 0, 0, 0, 2, 2, 2, 2, 2 };
     private static final int[] ys = new int[] { 3, 0, 3, 0, 0, 0, 1, 0, 1, 0, 0, 2, 2, 3, 3, 3, 3, 3, 0, 3, 3, 0, 0, 1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 2, 2, 2, 2, 2, 3, 2 };
+
+    private CommonAssets() {
+    }
 
     public static final Function<Identifier, AssetProcessor> BLOCK_ITEM_FUNCTION = modelId -> (pack, id) ->
         pack.addItemModel(modelId, state -> state
@@ -130,7 +133,7 @@ public final class CommonAssets {
                         settings.model(Motherlode.id(id, name -> "block/" + name + modelStrings[models[jj]]))
                             .rotationX(xs[jj] * 90)
                             .rotationY(ys[ii] * 90)
-                            .uvlock(xs[jj] != 0 || ys[ii] != 0));
+                            .uvLock(xs[jj] != 0 || ys[ii] != 0));
                     i++;
                     j++;
                 }
@@ -152,8 +155,7 @@ public final class CommonAssets {
             .parent(new Identifier("block/cube_column"))
             .texture("end", new Identifier(id.getNamespace(), "block/" + texId))
             .texture("side", new Identifier(id.getNamespace(), "block/" + texId))
-        );
-        pack.addBlockState(id, builder -> builder
+        ).addBlockState(id, builder -> builder
             .variant("type=top", settings -> settings.model(Motherlode.id(id, name -> "block/" + name + "_top")))
             .variant("type=bottom", settings -> settings.model(Motherlode.id(id, name -> "block/" + name)))
             .variant("type=double", settings -> settings.model(Motherlode.id(id, name -> "block/" + name + "_double")))
@@ -174,8 +176,9 @@ public final class CommonAssets {
             .texture("side", side)
         );
 
-    public static ModelBuilder.Override floatPredicate(ModelBuilder.Override override, String name, Number value) {
-        override.with("predicate", JsonObject::new, predicate -> predicate.addProperty(name, value));
+    public static ModelBuilder.PropertyOverride floatPredicate(ModelBuilder.PropertyOverride override, String name, Number value) {
+        override.with(builder -> builder
+            .with("predicate", JsonObject::new, predicate -> predicate.addProperty(name, value)));
         return override;
     }
 }

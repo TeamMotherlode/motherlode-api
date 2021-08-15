@@ -4,54 +4,26 @@ import motherlode.base.api.Processor;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 
-public record JsonArrayBuilder(JsonArray json) {
-    public JsonArrayBuilder() {
-        this(new JsonArray());
-    }
+public interface JsonArrayBuilder {
+    JsonArrayBuilder add(JsonElement value);
 
-    public void write(JsonArray target) {
-        target.addAll(this.json);
-    }
+    JsonArrayBuilder add(String value);
 
-    public JsonArray build() {
-        JsonArray array = new JsonArray();
-        this.write(array);
+    JsonArrayBuilder add(boolean value);
 
-        return array;
-    }
+    JsonArrayBuilder add(Number value);
 
-    public JsonArrayBuilder add(JsonElement value) {
-        this.json.add(value);
-        return this;
-    }
+    JsonArrayBuilder add(Character value);
 
-    public JsonArrayBuilder add(String value) {
-        this.json.add(value);
-        return this;
-    }
+    JsonArrayBuilder add(Processor<JsonBuilder> settings);
 
-    public JsonArrayBuilder add(boolean value) {
-        this.json.add(value);
-        return this;
-    }
+    JsonArrayBuilder addArray(Processor<JsonArrayBuilder> settings);
 
-    public JsonArrayBuilder add(Number value) {
-        this.json.add(value);
-        return this;
-    }
+    JsonArrayBuilder write(JsonArray target);
 
-    public JsonArrayBuilder add(Character value) {
-        this.json.add(value);
-        return this;
-    }
+    JsonArray build();
 
-    public JsonArrayBuilder add(Processor<JsonBuilder> settings) {
-        this.json.add(settings.process(new JsonBuilder()).build());
-        return this;
-    }
-
-    public JsonArrayBuilder addArray(Processor<JsonArrayBuilder> settings) {
-        this.json.add(settings.process(new JsonArrayBuilder()).build());
-        return this;
+    default Resource<JsonArray> buildResource() {
+        return new JsonResource<>(this.build());
     }
 }

@@ -4,6 +4,7 @@ import net.minecraft.util.Identifier;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import motherlode.base.api.Processor;
+import motherlode.base.api.resource.builder.JsonBuilder;
 
 /**
  * Builder for a model file ({@code namespace:models/block|item/model_id.json}).
@@ -12,6 +13,14 @@ import motherlode.base.api.Processor;
  */
 @Environment(EnvType.CLIENT)
 public interface ModelBuilder {
+    /**
+     * Allows adding any JSON properties.
+     *
+     * @param json A callback which will be passed a {@link JsonBuilder}.
+     * @return this
+     */
+    ModelBuilder with(Processor<JsonBuilder> json);
+
     /**
      * Set the parent model for this model to inherit from.
      *
@@ -70,6 +79,14 @@ public interface ModelBuilder {
     @Environment(EnvType.CLIENT)
     interface Display {
         /**
+         * Allows adding any JSON properties.
+         *
+         * @param json A callback which will be passed a {@link JsonBuilder}.
+         * @return this
+         */
+        Display with(Processor<JsonBuilder> json);
+
+        /**
          * Set the rotation of this model around each axis.
          *
          * @param x The rotation around the X axis.
@@ -107,6 +124,14 @@ public interface ModelBuilder {
      */
     @Environment(EnvType.CLIENT)
     interface PropertyOverride {
+        /**
+         * Allows adding any JSON properties.
+         *
+         * @param json A callback which will be passed a {@link JsonBuilder}.
+         * @return this
+         */
+        PropertyOverride with(Processor<JsonBuilder> json);
+
         /**
          * Set the required value of the given property.
          * Calling this multiple times will require all properties to match.

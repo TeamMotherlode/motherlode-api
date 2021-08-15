@@ -6,77 +6,37 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
-public class JsonBuilder {
-    private final JsonObject json;
+public interface JsonBuilder {
+    <J extends JsonElement> JsonBuilder with(String key, Supplier<J> json, Processor<J> run);
 
-    public JsonBuilder(JsonObject json) {
-        this.json = json;
-    }
+    JsonBuilder add(String name, JsonElement value);
 
-    public JsonBuilder() {
-        this(new JsonObject());
-    }
+    JsonBuilder add(String name, String value);
 
-    public <J extends JsonElement> void with(String key, Supplier<J> json, Processor<J> run) {
-        with(this.json, key, json, run);
-    }
+    JsonBuilder add(String name, boolean value);
 
-    public JsonBuilder add(String name, JsonElement value) {
-        this.json.add(name, value);
-        return this;
-    }
+    JsonBuilder add(String name, Number value);
 
-    public JsonBuilder add(String name, String value) {
-        this.json.addProperty(name, value);
-        return this;
-    }
+    JsonBuilder add(String name, Character value);
 
-    public JsonBuilder add(String name, boolean value) {
-        this.json.addProperty(name, value);
-        return this;
-    }
+    JsonBuilder addObject(String name, Processor<JsonBuilder> settings);
 
-    public JsonBuilder add(String name, Number value) {
-        this.json.addProperty(name, value);
-        return this;
-    }
+    JsonBuilder addArray(String name, Processor<JsonArrayBuilder> settings);
 
-    public JsonBuilder add(String name, Character value) {
-        this.json.addProperty(name, value);
-        return this;
-    }
+    JsonBuilder write(JsonObject target);
 
-    public JsonBuilder addObject(String name, Processor<JsonBuilder> settings) {
-        this.json.add(name, settings.process(new JsonBuilder()).build());
-        return this;
-    }
+    JsonObject build();
 
-    public JsonBuilder addArray(String name, Processor<JsonArrayBuilder> settings) {
-        this.json.add(name, settings.process(new JsonArrayBuilder()).build());
-        return this;
-    }
-
-    public void write(JsonObject target) {
-        json.entrySet().forEach(e -> target.add(e.getKey(), e.getValue()));
-    }
-
-    public JsonObject build() {
-        JsonObject object = new JsonObject();
-        this.write(object);
-
-        return object;
-    }
-
-    public Resource<JsonObject> buildResource() {
+    default Resource<JsonObject> buildResource() {
         return new JsonResource<>(this.build());
     }
 
     @SuppressWarnings("unchecked")
-    public static <J extends JsonElement> void with(JsonObject in, String key, Supplier<J> json, Processor<J> run) {
+    static <J extends JsonElement> void with(JsonObject in, String key, Supplier<J> json, Processor<J> run) {
         in.add(key, run.process(in.has(key) ? (J) in.get(key) : json.get()));
     }
 
-    public static JsonArray arrayOf(boolean... values) {
+    static JsonArray arrayOf(boolean... values) {
         JsonArray array = new JsonArray();
 
         for (boolean i : values) array.add(i);
@@ -84,7 +44,7 @@ public class JsonBuilder {
         return array;
     }
 
-    public static JsonArray arrayOf(Character... values) {
+    static JsonArray arrayOf(Character... values) {
         JsonArray array = new JsonArray();
 
         for (Character i : values) array.add(i);
@@ -92,7 +52,7 @@ public class JsonBuilder {
         return array;
     }
 
-    public static JsonArray arrayOf(Number... values) {
+    static JsonArray arrayOf(Number... values) {
         JsonArray array = new JsonArray();
 
         for (Number i : values) array.add(i);
@@ -100,7 +60,7 @@ public class JsonBuilder {
         return array;
     }
 
-    public static JsonArray arrayOf(String... values) {
+    static JsonArray arrayOf(String... values) {
         JsonArray array = new JsonArray();
 
         for (String i : values) array.add(i);

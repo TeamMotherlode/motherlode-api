@@ -5,6 +5,7 @@ import net.minecraft.util.math.Direction;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import motherlode.base.api.Processor;
+import motherlode.base.api.resource.builder.JsonBuilder;
 import com.swordglowsblue.artifice.api.builder.assets.ModelBuilder;
 
 /**
@@ -14,6 +15,14 @@ import com.swordglowsblue.artifice.api.builder.assets.ModelBuilder;
  */
 @Environment(EnvType.CLIENT)
 public interface ModelElementBuilder {
+    /**
+     * Allows adding any JSON properties.
+     *
+     * @param json A callback which will be passed a {@link JsonBuilder}.
+     * @return this
+     */
+    ModelElementBuilder with(Processor<JsonBuilder> json);
+
     /**
      * Set the start point of this cuboid.
      *
@@ -67,6 +76,14 @@ public interface ModelElementBuilder {
     @Environment(EnvType.CLIENT)
     interface Rotation {
         /**
+         * Allows adding any JSON properties.
+         *
+         * @param json A callback which will be passed a {@link JsonBuilder}.
+         * @return this
+         */
+        Rotation with(Processor<JsonBuilder> json);
+
+        /**
          * Set the origin point of this rotation.
          *
          * @param x The origin point on the X axis. Clamped to between -16 and 32.
@@ -109,6 +126,14 @@ public interface ModelElementBuilder {
      */
     @Environment(EnvType.CLIENT)
     interface Face {
+        /**
+         * Allows adding any JSON properties.
+         *
+         * @param json A callback which will be passed a {@link JsonBuilder}.
+         * @return this
+         */
+        Face with(Processor<JsonBuilder> json);
+
         /**
          * Set the texture UV to apply to this face. Detected by position within the block if not specified.
          *
