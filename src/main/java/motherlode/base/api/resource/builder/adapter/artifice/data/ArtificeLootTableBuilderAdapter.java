@@ -70,7 +70,7 @@ public record ArtificeLootTableBuilderAdapter(
             this.pool.condition(id, builder -> settings.accept(new ArtificeJsonBuilderAdapter(builder)));
             return this;
         }
-        
+
         public static record ArtificeEntryAdapter(
             com.swordglowsblue.artifice.api.builder.data.LootTableBuilder.Pool.Entry entry) implements Entry {
             @Override
