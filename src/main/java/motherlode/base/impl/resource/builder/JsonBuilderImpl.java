@@ -68,7 +68,7 @@ public class JsonBuilderImpl implements JsonBuilder {
 
     @Override
     public JsonBuilder write(JsonObject target) {
-        json.entrySet().forEach(e -> target.add(e.getKey(), e.getValue()));
+        JsonBuilder.copy(this.json, target);
         return this;
     }
 

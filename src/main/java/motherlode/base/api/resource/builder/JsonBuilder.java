@@ -36,6 +36,10 @@ public interface JsonBuilder {
         in.add(key, run.process(in.has(key) ? (J) in.get(key) : json.get()));
     }
 
+    static void copy(JsonObject input, JsonObject target) {
+        input.entrySet().forEach(e -> target.add(e.getKey(), e.getValue()));
+    }
+
     static JsonArray arrayOf(boolean... values) {
         JsonArray array = new JsonArray();
 

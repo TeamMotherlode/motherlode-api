@@ -86,10 +86,10 @@ public interface LootTableBuilder {
         Pool entry(Processor<Entry> settings);
 
         /**
-         * Add a condition to this pool. All conditions must pass for the pool to be used.
-         * The specific properties of this vary by condition, so this falls through to direct JSON building.
+         * Add a function to this pool. All conditions must pass for the pool to be used.
+         * The specific properties of this vary by function, so this falls through to direct JSON building.
          *
-         * @param id       The condition ID.
+         * @param id       The function ID.
          * @param settings A callback which will be passed a {@link JsonBuilder}.
          * @return this
          * @see <a href="https://minecraft.gamepedia.com/Loot_table#Conditions" target="_blank">Minecraft Wiki</a>
@@ -169,10 +169,10 @@ public interface LootTableBuilder {
             Entry function(Identifier id, Processor<Function> settings);
 
             /**
-             * Add a condition to this entry. All conditions must pass for the entry to be used.
-             * The specific properties of this vary by condition, so this falls through to direct JSON building.
+             * Add a function to this entry. All conditions must pass for the entry to be used.
+             * The specific properties of this vary by function, so this falls through to direct JSON building.
              *
-             * @param id       The condition ID.
+             * @param id       The function ID.
              * @param settings A callback which will be passed a {@link JsonBuilder}.
              * @return this
              * @see <a href="https://minecraft.gamepedia.com/Loot_table#Conditions" target="_blank">Minecraft Wiki</a>
@@ -195,10 +195,10 @@ public interface LootTableBuilder {
                 Function with(Processor<JsonBuilder> json);
 
                 /**
-                 * Add a condition to this function. All conditions must pass for the function to be applied.
-                 * The specific properties of this vary by condition, so this falls through to direct JSON building.
+                 * Add a function to this function. All conditions must pass for the function to be applied.
+                 * The specific properties of this vary by function, so this falls through to direct JSON building.
                  *
-                 * @param id       The condition ID.
+                 * @param id       The function ID.
                  * @param settings A callback which will be passed a {@link JsonBuilder}.
                  * @return this
                  * @see <a href="https://minecraft.gamepedia.com/Loot_table#Conditions" target="_blank">Minecraft Wiki</a>
