@@ -5,17 +5,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.function.Consumer;
 import java.util.function.UnaryOperator;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.MapColor;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.math.intprovider.ConstantIntProvider;
-import net.minecraft.world.gen.feature.Feature;
-import net.minecraft.world.gen.feature.TreeFeatureConfig;
-import net.minecraft.world.gen.feature.size.TwoLayersFeatureSize;
-import net.minecraft.world.gen.foliage.BlobFoliagePlacer;
-import net.minecraft.world.gen.stateprovider.SimpleBlockStateProvider;
-import net.minecraft.world.gen.trunk.StraightTrunkPlacer;
 import net.fabricmc.api.ModInitializer;
 import motherlode.base.MotherlodeBase;
 import motherlode.base.api.resource.AssetProcessor;
@@ -25,8 +15,6 @@ import motherlode.base.api.resource.DataGenerator;
 import motherlode.base.api.resource.DataProcessor;
 import motherlode.base.api.resource.builder.adapter.artifice.assets.ArtificeResourceBuilderAdapter;
 import motherlode.base.api.resource.builder.adapter.artifice.data.ArtificeDataPackBuilderAdapter;
-import motherlode.base.api.varianttypes.wood.WoodType;
-import motherlode.base.api.worldgen.DefaultSaplingGenerator;
 import motherlode.base.api.worldgen.FeaturesManager;
 import motherlode.base.impl.ClientRegisterImpl;
 import motherlode.base.impl.FeaturesManagerImpl;
@@ -94,12 +82,13 @@ public final class Motherlode implements ModInitializer {
         });
 
         // DEBUG
-
+        /*
         getLogger().log(Level.WARN, "[Motherlode] Some debug tests are enabled. If you see this message and this is not in a development environment, please report this to the Motherlode team.");
 
         WoodType testWoodType = new WoodType(id(MotherlodeBase.MODID, "test"), MapColor.OAK_TAN, MapColor.SPRUCE_BROWN, (BlockState log, BlockState leaves) -> new DefaultSaplingGenerator(id(MotherlodeBase.MODID, "test_tree"),
             Feature.TREE.configure(new TreeFeatureConfig.Builder(new SimpleBlockStateProvider(log), new StraightTrunkPlacer(4, 2, 0), new SimpleBlockStateProvider(leaves), new SimpleBlockStateProvider(Blocks.OAK_SAPLING.getDefaultState()),
                 new BlobFoliagePlacer(ConstantIntProvider.create(2), ConstantIntProvider.create(0), 3), new TwoLayersFeatureSize(1, 0, 1)).ignoreVines().build()))).register();
+        */
     }
 
     /**
@@ -152,7 +141,7 @@ public final class Motherlode implements ModInitializer {
      * @param registerable The {@link Registerable} used to register the thing.
      * @param id           The {@link Identifier} that will be passed to the {@code Registerable}, {@code AssetProcessor} and {@code DataProcessor}.
      * @param t            The thing to register.
-     * @param data         A {@link DataProcessor} that can be used to register data for the thing using Artifice.
+     * @param data         A {@link DataProcessor} that can be used to register data for the thing.
      * @param <T>          The type of the thing.
      * @return The thing that was registered
      */
@@ -181,7 +170,7 @@ public final class Motherlode implements ModInitializer {
      * @param id           The {@link Identifier} that will be passed to the {@code Registerable}, {@code AssetProcessor} and {@code DataProcessor}.
      * @param t            The thing to register.
      * @param assets       An {@link AssetProcessor} that can be used to register assets for the thing.
-     * @param data         A {@link DataProcessor} that can be used to register data for the thing using Artifice.
+     * @param data         A {@link DataProcessor} that can be used to register data for the thing.
      * @param <T>          The type of the thing.
      * @return The thing that was registered
      */
@@ -210,7 +199,7 @@ public final class Motherlode implements ModInitializer {
      * @param id             The {@link Identifier} that will be passed to the {@code Registerable}, {@code AssetProcessor} and {@code DataProcessor}.
      * @param t              The thing to register.
      * @param clientConsumer A {@link Consumer} that will be only be run on the client. The {@code Identifier id} will be passed to this.
-     * @param data           A {@link DataProcessor} that can be used to register data for the thing using Artifice.
+     * @param data           A {@link DataProcessor} that can be used to register data for the thing.
      * @param <T>            The type of the thing.
      * @return The thing that was registered
      */
@@ -241,7 +230,7 @@ public final class Motherlode implements ModInitializer {
      * @param t              The thing to register.
      * @param clientConsumer A {@link Consumer} that will be only be run on the client. The {@code Identifier id} will be passed to this.
      * @param assets         An {@link AssetProcessor} that can be used to register assets for the thing.
-     * @param data           A {@link DataProcessor} that can be used to register data for the thing using Artifice.
+     * @param data           A {@link DataProcessor} that can be used to register data for the thing.
      * @param <T>            The type of the thing.
      * @return The thing that was registered
      */
@@ -270,7 +259,7 @@ public final class Motherlode implements ModInitializer {
      * @param id           The {@link Identifier} that will be passed to the {@code Registerable}, {@code AssetProcessor} and {@code DataProcessor}.
      * @param t            The thing to register.
      * @param p            A {@link Processor} that can be used to do something with the thing after it is registered.
-     * @param data         A {@link DataProcessor} that can be used to register data for the thing using Artifice.
+     * @param data         A {@link DataProcessor} that can be used to register data for the thing.
      * @param <T>          The type of the thing.
      * @return The thing that was registered
      */
@@ -301,7 +290,7 @@ public final class Motherlode implements ModInitializer {
      * @param t            The thing to register.
      * @param p            A {@link Processor} that can be used to do something with the thing after it is registered.
      * @param assets       An {@link AssetProcessor} that can be used to register assets for the thing.
-     * @param data         A {@link DataProcessor} that can be used to register data for the thing using Artifice.
+     * @param data         A {@link DataProcessor} that can be used to register data for the thing.
      * @param <T>          The type of the thing.
      * @return The thing that was registered
      */
@@ -332,7 +321,7 @@ public final class Motherlode implements ModInitializer {
      * @param t              The thing to register.
      * @param p              A {@link Processor} that can be used to do something with the thing after it is registered.
      * @param clientConsumer A {@link Consumer} that will be only be run on the client. The {@code Identifier id} will be passed to this.
-     * @param data           A {@link DataProcessor} that can be used to register data for the thing using Artifice.
+     * @param data           A {@link DataProcessor} that can be used to register data for the thing.
      * @param <T>            The type of the thing.
      * @return The thing that was registered
      */
@@ -365,7 +354,7 @@ public final class Motherlode implements ModInitializer {
      * @param p              A {@link Processor} that can be used to do something with the thing after it is registered.
      * @param clientConsumer A {@link Consumer} that will be only be run on the client. The {@code Identifier id} will be passed to this.
      * @param assets         An {@link AssetProcessor} that can be used to register assets for the thing.
-     * @param data           A {@link DataProcessor} that can be used to register data for the thing using Artifice.
+     * @param data           A {@link DataProcessor} that can be used to register data for the thing.
      * @param <T>            The type of the thing.
      * @return The thing that was registered
      */
