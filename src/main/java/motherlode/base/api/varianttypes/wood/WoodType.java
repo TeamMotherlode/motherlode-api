@@ -492,10 +492,13 @@ public class WoodType extends MotherlodeVariantType<Block, WoodType> {
 
         CommonData.DEFAULT_BLOCK_LOOT_TABLE.accept(pack, Motherlode.id(id, name -> name + "_sapling"));
 
-        CommonData.BLOCK_TAG.apply(Motherlode.id(id, name -> id.getPath() + "_logs")).accept(pack, Motherlode.id(id, name -> name + "_log"));
-        CommonData.BLOCK_TAG.apply(Motherlode.id(id, name -> id.getPath() + "_logs")).accept(pack, Motherlode.id(id, name -> "stripped_" + name + "_log"));
-        CommonData.BLOCK_TAG.apply(Motherlode.id(id, name -> id.getPath() + "_logs")).accept(pack, Motherlode.id(id, name -> name + "_wood"));
-        CommonData.BLOCK_TAG.apply(Motherlode.id(id, name -> id.getPath() + "_logs")).accept(pack, Motherlode.id(id, name -> "stripped_" + name + "_wood"));
+        CommonData.blockTag(tag -> tag
+                .value(Motherlode.id(id, name -> name + "_log"))
+                .value(Motherlode.id(id, name -> "stripped_" + name + "_log"))
+                .value(Motherlode.id(id, name -> name + "_wood"))
+                .value(Motherlode.id(id, name -> "stripped_" + name + "_wood"))
+        ).accept(pack, Motherlode.id(id, name -> id.getPath() + "_logs"));
+
         CommonData.BLOCK_TAG_INCLUDE.apply(new Identifier("minecraft", "logs_that_burn")).accept(pack, Motherlode.id(id, name -> name + "_logs"));
         CommonData.BLOCK_TAG.apply(new Identifier("minecraft", "planks")).accept(pack, Motherlode.id(id, name -> name + "_planks"));
         CommonData.BLOCK_TAG.apply(new Identifier("minecraft", "wooden_buttons")).accept(pack, Motherlode.id(id, name -> name + "_button"));

@@ -81,13 +81,11 @@ public final class Motherlode implements ModInitializer {
 
         // DEBUG
         /*
-
         getLogger().log(Level.WARN, "[Motherlode] Some debug tests are enabled. If you see this message and this is not in a development environment, please report this to the Motherlode team.");
 
-        WoodType testWoodType = new WoodType(id(MotherlodeBase.MODID, "test"), MapColor.WOOD, MapColor.SPRUCE, (log, leaves) -> new DefaultSaplingGenerator(id(MotherlodeBase.MODID, "test_tree"),
-            Feature.TREE.configure(new TreeFeatureConfig.Builder(new SimpleBlockStateProvider(log), new SimpleBlockStateProvider(leaves), new BlobFoliagePlacer(UniformIntDistribution.of(2), UniformIntDistribution.of(0), 3), new StraightTrunkPlacer(4, 2, 0), new TwoLayersFeatureSize(1, 0, 1)).ignoreVines().build())),
-            new Item.Settings().group(ItemGroup.BUILDING_BLOCKS)).register();
-
+        WoodType testWoodType = new WoodType(id(MotherlodeBase.MODID, "test"), MapColor.OAK_TAN, MapColor.SPRUCE_BROWN, (BlockState log, BlockState leaves) -> new DefaultSaplingGenerator(id(MotherlodeBase.MODID, "test_tree"),
+            Feature.TREE.configure(new TreeFeatureConfig.Builder(new SimpleBlockStateProvider(log), new StraightTrunkPlacer(4, 2, 0), new SimpleBlockStateProvider(leaves), new SimpleBlockStateProvider(Blocks.OAK_SAPLING.getDefaultState()),
+                new BlobFoliagePlacer(ConstantIntProvider.create(2), ConstantIntProvider.create(0), 3), new TwoLayersFeatureSize(1, 0, 1)).ignoreVines().build()))).register();
         */
     }
 

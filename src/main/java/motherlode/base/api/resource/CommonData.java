@@ -3,7 +3,9 @@ package motherlode.base.api.resource;
 import java.util.function.Function;
 import net.minecraft.util.Identifier;
 import motherlode.base.api.Motherlode;
+import motherlode.base.api.Processor;
 import com.swordglowsblue.artifice.api.builder.TypedJsonBuilder;
+import com.swordglowsblue.artifice.api.builder.data.TagBuilder;
 
 public final class CommonData {
     public static final String COMMON_NAMESPACE = "c";
@@ -21,9 +23,6 @@ public final class CommonData {
                 )
             )
         );
-
-    private CommonData() {
-    }
 
     public static final Function<Identifier, DataProcessor> ITEM_TAG = tagId -> (pack, id) ->
         pack.addItemTag(tagId, tag -> tag
@@ -44,4 +43,15 @@ public final class CommonData {
         pack.addBlockTag(tagId, tag -> tag
             .replace(false)
             .include(id)));
+
+    private CommonData() {
+    }
+
+    public static DataProcessor itemTag(Processor<TagBuilder> values) {
+        return (pack, id) -> pack.addItemTag(id, tag -> values.accept(tag.replace(false)));
+    }
+
+    public static DataProcessor blockTag(Processor<TagBuilder> values) {
+        return itemTag(values).after((pack, id) -> pack.addBlockTag(id, tag -> values.accept(tag.replace(false))));
+    }
 }
