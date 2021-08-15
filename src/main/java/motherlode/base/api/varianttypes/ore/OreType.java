@@ -11,6 +11,7 @@ import motherlode.base.api.Registerable;
 import motherlode.base.api.resource.CommonAssets;
 import motherlode.base.api.resource.CommonData;
 import motherlode.base.api.resource.DataProcessor;
+import motherlode.base.api.resource.builder.ResourcePackBuilder;
 import motherlode.base.api.varianttype.MotherlodeVariantType;
 import com.swordglowsblue.artifice.api.ArtificeResourcePack;
 
@@ -96,7 +97,7 @@ public class OreType extends MotherlodeVariantType<Object, OreType> {
     }
 
     @Override
-    public void accept(ArtificeResourcePack.ClientResourcePackBuilder pack, Identifier id) {
+    public void accept(ResourcePackBuilder pack, Identifier id) {
         CommonAssets.DEFAULT_BLOCK.accept(pack, Motherlode.id(id, name -> name + "_ore"));
         CommonAssets.DEFAULT_BLOCK.accept(pack, Motherlode.id(id, name -> "deepslate_" + name + "_ore"));
         CommonAssets.DEFAULT_ITEM_MODEL.accept(pack, Motherlode.id(this.getBaseId(), name -> this.materialName));

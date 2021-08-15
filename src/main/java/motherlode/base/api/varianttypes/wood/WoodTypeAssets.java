@@ -6,11 +6,14 @@ import motherlode.base.api.Motherlode;
 import motherlode.base.api.resource.AssetProcessor;
 import motherlode.base.api.resource.CommonAssets;
 
-public class WoodTypeAssets {
+public final class WoodTypeAssets {
     private static final boolean[] BOOLEAN = new boolean[] { true, false };
     private static final String[] ORIENTATIONS = new String[] { "north", "east", "south", "west" };
     private static final String[] ORIENTATIONS2 = new String[] { "south", "west", "north", "east" };
     private static final String[] BUTTON_MODEL_TYPES = new String[] { "", "_pressed", "_inventory" };
+
+    private WoodTypeAssets() {
+    }
 
     public static final AssetProcessor BUTTON_STATE = (pack, id) ->
         pack.addBlockState(Motherlode.id(id, name -> name + "_button"), state -> {
@@ -38,7 +41,7 @@ public class WoodTypeAssets {
                         .model(Motherlode.id(id, name -> "block/" + name + "_button" + (pressed ? "_pressed" : "")))
                         .rotationX(90)
                         .rotationY(ii * 90)
-                        .uvlock(true)
+                        .uvLock(true)
                     );
                 }
             }
@@ -66,7 +69,7 @@ public class WoodTypeAssets {
                         state.variant("facing=" + ORIENTATIONS2[i] + ",in_wall=" + inWall + ",open=" + open, variant -> variant
                             .model(Motherlode.id(id, name -> "block/" + name + "_fence_gate" + (inWall ? "_wall" : "") + (open ? "_open" : "")))
                             .rotationY(ii * 90)
-                            .uvlock(true)
+                            .uvLock(true)
                         );
                     }
             }

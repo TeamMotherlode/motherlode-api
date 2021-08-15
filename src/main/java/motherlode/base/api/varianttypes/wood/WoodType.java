@@ -28,6 +28,7 @@ import motherlode.base.api.Motherlode;
 import motherlode.base.api.Registerable;
 import motherlode.base.api.resource.CommonAssets;
 import motherlode.base.api.resource.CommonData;
+import motherlode.base.api.resource.builder.ResourcePackBuilder;
 import motherlode.base.api.varianttype.MotherlodeVariantType;
 import motherlode.base.block.DefaultPressurePlateBlock;
 import motherlode.base.block.DefaultSaplingBlock;
@@ -43,26 +44,11 @@ public class WoodType extends MotherlodeVariantType<Block, WoodType> {
     private static final Item.Settings REDSTONE = new Item.Settings().group(ItemGroup.REDSTONE);
     private static final Item.Settings DECORATIONS = new Item.Settings().group(ItemGroup.DECORATIONS);
 
-    private static final Function<Variant, Optional<Item.Settings>> VANILLA_ITEM_SETTINGS_FUNCTION = variant -> {
-        switch (variant) {
-            case LOG:
-            case STRIPPED_LOG:
-            case WOOD:
-            case STRIPPED_WOOD:
-            case PLANKS:
-                return Optional.of(BUILDING_BLOCKS);
-            case BUTTON:
-            case FENCE_GATE:
-            case PRESSURE_PLATE:
-                return Optional.of(REDSTONE);
-            case FENCE:
-            case LEAVES:
-            case SAPLING:
-                return Optional.of(DECORATIONS);
-            case POTTED_SAPLING:
-            default:
-                return Optional.empty();
-        }
+    private static final Function<Variant, Optional<Item.Settings>> VANILLA_ITEM_SETTINGS_FUNCTION = variant -> switch (variant) {
+        case LOG, STRIPPED_LOG, WOOD, STRIPPED_WOOD, PLANKS -> Optional.of(BUILDING_BLOCKS);
+        case BUTTON, FENCE_GATE, PRESSURE_PLATE -> Optional.of(REDSTONE);
+        case FENCE, LEAVES, SAPLING -> Optional.of(DECORATIONS);
+        default -> Optional.empty();
     };
 
     public static final WoodType OAK = new WoodType(new Identifier("minecraft", "oak"), null, null, null, null, null).withoutBase().register();
@@ -213,7 +199,7 @@ public class WoodType extends MotherlodeVariantType<Block, WoodType> {
     }
 
     @Override
-    public void accept(ArtificeResourcePack.ClientResourcePackBuilder pack, Identifier id) {
+    public void accept(ResourcePackBuilder pack, Identifier id) {
         // Log
         pack.addBlockState(Motherlode.id(id, name -> name + "_log"), state -> state
             .variant("axis=x", variant -> variant
@@ -321,7 +307,7 @@ public class WoodType extends MotherlodeVariantType<Block, WoodType> {
                 .when("north", "true")
                 .apply(variant -> variant
                     .model(Motherlode.id(id, name -> "block/" + name + "_fence_side"))
-                    .uvlock(true)
+                    .uvLock(true)
                 )
             )
             .multipartCase(multipartCase -> multipartCase
@@ -329,7 +315,7 @@ public class WoodType extends MotherlodeVariantType<Block, WoodType> {
                 .apply(variant -> variant
                     .model(Motherlode.id(id, name -> "block/" + name + "_fence_side"))
                     .rotationY(90)
-                    .uvlock(true)
+                    .uvLock(true)
                 )
             )
             .multipartCase(multipartCase -> multipartCase
@@ -337,7 +323,7 @@ public class WoodType extends MotherlodeVariantType<Block, WoodType> {
                 .apply(variant -> variant
                     .model(Motherlode.id(id, name -> "block/" + name + "_fence_side"))
                     .rotationY(180)
-                    .uvlock(true)
+                    .uvLock(true)
                 )
             )
             .multipartCase(multipartCase -> multipartCase
@@ -345,7 +331,7 @@ public class WoodType extends MotherlodeVariantType<Block, WoodType> {
                 .apply(variant -> variant
                     .model(Motherlode.id(id, name -> "block/" + name + "_fence_side"))
                     .rotationY(270)
-                    .uvlock(true)
+                    .uvLock(true)
                 )
             )
         );

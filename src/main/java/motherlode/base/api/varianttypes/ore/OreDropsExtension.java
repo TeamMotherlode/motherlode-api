@@ -3,6 +3,7 @@ package motherlode.base.api.varianttypes.ore;
 import net.minecraft.util.Identifier;
 import motherlode.base.api.Motherlode;
 import motherlode.base.api.resource.CommonData;
+import motherlode.base.api.resource.builder.ResourcePackBuilder;
 import motherlode.base.api.varianttype.MotherlodeVariantType;
 import com.swordglowsblue.artifice.api.ArtificeResourcePack;
 import com.swordglowsblue.artifice.api.builder.TypedJsonBuilder;
@@ -21,7 +22,7 @@ public class OreDropsExtension implements MotherlodeVariantType.Extension<Object
     }
 
     @Override
-    public void accept(ArtificeResourcePack.ClientResourcePackBuilder pack, Identifier id) {
+    public void accept(ResourcePackBuilder pack, Identifier id) {
     }
 
     @Override

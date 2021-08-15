@@ -9,6 +9,7 @@ import motherlode.base.api.Motherlode;
 import motherlode.base.api.Registerable;
 import motherlode.base.api.resource.CommonAssets;
 import motherlode.base.api.resource.CommonData;
+import motherlode.base.api.resource.builder.ResourcePackBuilder;
 import motherlode.base.api.varianttype.MotherlodeVariantType;
 import com.swordglowsblue.artifice.api.ArtificeResourcePack;
 import com.swordglowsblue.artifice.api.builder.TypedJsonBuilder;
@@ -30,7 +31,7 @@ public class RawOreExtension implements MotherlodeVariantType.Extension<Object, 
     }
 
     @Override
-    public void accept(ArtificeResourcePack.ClientResourcePackBuilder pack, Identifier id) {
+    public void accept(ResourcePackBuilder pack, Identifier id) {
         CommonAssets.DEFAULT_ITEM_MODEL.accept(pack, Motherlode.id(id, name -> "raw_" + name));
         CommonAssets.DEFAULT_BLOCK.accept(pack, Motherlode.id(id, name -> "raw_" + name + "_block"));
     }
