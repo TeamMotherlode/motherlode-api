@@ -53,7 +53,7 @@ public class ArrpJCondition {
     }
 
     /**
-     * "or"'s the conditions together
+     * "or"'s the conditions together.
      */
     public ArrpJCondition alternative(ArrpJCondition... conditions) {
         return this;

@@ -5,7 +5,7 @@ import motherlode.base.api.resource.builder.adapter.arrp.dummy.loottable.ArrpJLo
 
 public class ArrpRuntimeResourcePack {
     /**
-     * adds a loot table
+     * adds a loot table.
      */
     public void addLootTable(Identifier identifier, ArrpJLootTable table) {
     }
