@@ -5,6 +5,11 @@ import motherlode.base.api.Processor;
 import motherlode.base.api.resource.builder.data.AdvancementBuilder;
 import motherlode.base.api.resource.builder.data.LootTableBuilder;
 import motherlode.base.api.resource.builder.data.TagBuilder;
+import motherlode.base.api.resource.builder.data.recipe.CookingRecipeBuilder;
+import motherlode.base.api.resource.builder.data.recipe.GenericRecipeBuilder;
+import motherlode.base.api.resource.builder.data.recipe.ShapedRecipeBuilder;
+import motherlode.base.api.resource.builder.data.recipe.ShapelessRecipeBuilder;
+import motherlode.base.api.resource.builder.data.recipe.StonecuttingRecipeBuilder;
 
 /**
  * Passed to resource construction callbacks to register server-side resources.
@@ -72,4 +77,76 @@ public interface DataPackBuilder extends AssetPackBuilder {
      * @return this
      */
     DataPackBuilder addFunctionTag(Identifier id, Processor<TagBuilder> f);
+
+    /**
+     * Add a recipe with the given ID.
+     *
+     * @param id The ID of the recipe, which will be converted into the correct path.
+     * @param f  A callback which will be passed a {@link GenericRecipeBuilder} to create the recipe.
+     * @return this
+     */
+    DataPackBuilder addRecipe(Identifier id, Processor<GenericRecipeBuilder> f);
+
+    /**
+     * Add a shaped crafting recipe with the given ID.
+     *
+     * @param id The ID of the recipe, which will be converted into the correct path.
+     * @param f  A callback which will be passed a {@link ShapedRecipeBuilder} to create the recipe.
+     * @return this
+     */
+    DataPackBuilder addShapedRecipe(Identifier id, Processor<ShapedRecipeBuilder> f);
+
+    /**
+     * Add a shapeless crafting recipe with the given ID.
+     *
+     * @param id The ID of the recipe, which will be converted into the correct path.
+     * @param f  A callback which will be passed a {@link ShapelessRecipeBuilder} to create the recipe.
+     * @return this
+     */
+    DataPackBuilder addShapelessRecipe(Identifier id, Processor<ShapelessRecipeBuilder> f);
+
+    /**
+     * Add a stonecutter recipe with the given ID.
+     *
+     * @param id The ID of the recipe, which will be converted into the correct path.
+     * @param f  A callback which will be passed a {@link StonecuttingRecipeBuilder} to create the recipe.
+     * @return this
+     */
+    DataPackBuilder addStonecuttingRecipe(Identifier id, Processor<StonecuttingRecipeBuilder> f);
+
+    /**
+     * Add a smelting recipe with the given ID.
+     *
+     * @param id The ID of the recipe, which will be converted into the correct path.
+     * @param f  A callback which will be passed a {@link CookingRecipeBuilder} to create the recipe.
+     * @return this
+     */
+    DataPackBuilder addSmeltingRecipe(Identifier id, Processor<CookingRecipeBuilder> f);
+
+    /**
+     * Add a blast furnace recipe with the given ID.
+     *
+     * @param id The ID of the recipe, which will be converted into the correct path.
+     * @param f  A callback which will be passed a {@link CookingRecipeBuilder} to create the recipe.
+     * @return this
+     */
+    DataPackBuilder addBlastingRecipe(Identifier id, Processor<CookingRecipeBuilder> f);
+
+    /**
+     * Add a smoker recipe with the given ID.
+     *
+     * @param id The ID of the recipe, which will be converted into the correct path.
+     * @param f  A callback which will be passed a {@link CookingRecipeBuilder} to create the recipe.
+     * @return this
+     */
+    DataPackBuilder addSmokingRecipe(Identifier id, Processor<CookingRecipeBuilder> f);
+
+    /**
+     * Add a campfire recipe with the given ID.
+     *
+     * @param id The ID of the recipe, which will be converted into the correct path.
+     * @param f  A callback which will be passed a {@link CookingRecipeBuilder} to create the recipe.
+     * @return this
+     */
+    DataPackBuilder addCampfireRecipe(Identifier id, Processor<CookingRecipeBuilder> f);
 }

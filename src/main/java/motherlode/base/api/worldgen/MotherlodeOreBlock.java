@@ -12,7 +12,7 @@ import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.fabricmc.fabric.api.tool.attribute.v1.FabricToolTags;
 import motherlode.base.api.resource.CommonData;
 import motherlode.base.api.resource.DataProcessor;
-import com.swordglowsblue.artifice.api.ArtificeResourcePack;
+import motherlode.base.api.resource.builder.DataPackBuilder;
 
 public class MotherlodeOreBlock extends OreBlock implements DataProcessor {
     private static final UniformIntProvider NULL_INT_PROVIDER = UniformIntProvider.create(0, 0);
@@ -78,7 +78,7 @@ public class MotherlodeOreBlock extends OreBlock implements DataProcessor {
     }
 
     @Override
-    public void accept(ArtificeResourcePack.ServerResourcePackBuilder pack, Identifier id) {
+    public void accept(DataPackBuilder pack, Identifier id) {
         Identifier commonId = new Identifier(CommonData.COMMON_NAMESPACE, id.getPath());
 
         CommonData.BLOCK_TAG.apply(commonId).accept(pack, id);

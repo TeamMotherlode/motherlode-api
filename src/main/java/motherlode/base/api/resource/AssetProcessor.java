@@ -7,7 +7,7 @@ import motherlode.base.api.resource.builder.ResourcePackBuilder;
 @FunctionalInterface
 public interface AssetProcessor {
     /**
-     * This is called to register assets using Artifice.
+     * This is called to register assets.
      *
      * @param pack Resource pack builder to register assets to.
      * @param id   Identifier passed together with the {@code AssetProcessor}.
@@ -51,7 +51,6 @@ public interface AssetProcessor {
         Objects.requireNonNull(after);
 
         return (pack, id) -> {
-
             this.accept(pack, id);
             after.accept(pack, id);
         };

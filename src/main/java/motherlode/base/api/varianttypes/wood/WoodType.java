@@ -28,13 +28,13 @@ import motherlode.base.api.Motherlode;
 import motherlode.base.api.Registerable;
 import motherlode.base.api.resource.CommonAssets;
 import motherlode.base.api.resource.CommonData;
+import motherlode.base.api.resource.builder.DataPackBuilder;
 import motherlode.base.api.resource.builder.ResourcePackBuilder;
 import motherlode.base.api.varianttype.MotherlodeVariantType;
 import motherlode.base.block.DefaultPressurePlateBlock;
 import motherlode.base.block.DefaultSaplingBlock;
 import motherlode.base.block.DefaultWoodenButtonBlock;
 import motherlode.base.mixin.BlocksAccessor;
-import com.swordglowsblue.artifice.api.ArtificeResourcePack;
 
 /**
  * Variant type that adds blocks required for an overworld wood type.
@@ -375,7 +375,7 @@ public class WoodType extends MotherlodeVariantType<Block, WoodType> {
     }
 
     @Override
-    public void accept(ArtificeResourcePack.ServerResourcePackBuilder pack, Identifier id) {
+    public void accept(DataPackBuilder pack, Identifier id) {
         CommonData.DEFAULT_BLOCK_LOOT_TABLE.accept(pack, Motherlode.id(id, name -> name + "_log"));
         CommonData.DEFAULT_BLOCK_LOOT_TABLE.accept(pack, Motherlode.id(id, name -> "stripped_" + name + "_log"));
         CommonData.DEFAULT_BLOCK_LOOT_TABLE.accept(pack, Motherlode.id(id, name -> name + "_wood"));
@@ -396,17 +396,17 @@ public class WoodType extends MotherlodeVariantType<Block, WoodType> {
                         .type(new Identifier("minecraft", "item"))
                         .condition(new Identifier("minecraft", "alternative"), condition -> condition
                             .addArray("terms", terms -> terms
-                                .addObject(term -> term
+                                .add(term -> term
                                     .add("condition", "minecraft:match_tool")
                                     .addObject("predicate", predicate -> predicate
                                         .add("item", "minecraft:shears")
                                     )
                                 )
-                                .addObject(term -> term
+                                .add(term -> term
                                     .add("condition", "minecraft:match_tool")
                                     .addObject("predicate", predicate -> predicate
                                         .addArray("enchantments", enchantments -> enchantments
-                                            .addObject(enchantment -> enchantment
+                                            .add(enchantment -> enchantment
                                                 .add("enchantment", "minecraft:silk_touch")
                                                 .addObject("levels", levels -> levels
                                                     .add("min", 1)
@@ -451,10 +451,12 @@ public class WoodType extends MotherlodeVariantType<Block, WoodType> {
                         )
                     )
                     .function(new Identifier("minecraft", "set_count"), function -> function
-                        .addObject("count", count -> count
-                            .add("min", 1.0)
-                            .add("max", 2.0)
-                            .add("type", "minecraft:uniform")
+                        .with(functionJson -> functionJson
+                            .addObject("count", count -> count
+                                .add("min", 1.0)
+                                .add("max", 2.0)
+                                .add("type", "minecraft:uniform")
+                            )
                         )
                     )
                     .function(new Identifier("minecraft", "explosion_decay"), function -> {
@@ -465,17 +467,17 @@ public class WoodType extends MotherlodeVariantType<Block, WoodType> {
                     .addObject("term", term -> term
                         .add("condition", "minecraft:alternative")
                         .addArray("terms", terms -> terms
-                            .addObject(term2 -> term2
+                            .add(term2 -> term2
                                 .add("condition", "minecraft:match_tool")
                                 .addObject("predicate", predicate -> predicate
                                     .add("item", "minecraft:shears")
                                 )
                             )
-                            .addObject(term2 -> term2
+                            .add(term2 -> term2
                                 .add("condition", "minecraft:match_tool")
                                 .addObject("predicate", predicate -> predicate
                                     .addArray("enchantments", enchantments -> enchantments
-                                        .addObject(enchantment -> enchantment
+                                        .add(enchantment -> enchantment
                                             .add("enchantment", "minecraft:silk_touch")
                                             .addObject("levels", levels -> levels
                                                 .add("min", 1)
@@ -493,10 +495,10 @@ public class WoodType extends MotherlodeVariantType<Block, WoodType> {
         CommonData.DEFAULT_BLOCK_LOOT_TABLE.accept(pack, Motherlode.id(id, name -> name + "_sapling"));
 
         CommonData.blockTag(tag -> tag
-                .value(Motherlode.id(id, name -> name + "_log"))
-                .value(Motherlode.id(id, name -> "stripped_" + name + "_log"))
-                .value(Motherlode.id(id, name -> name + "_wood"))
-                .value(Motherlode.id(id, name -> "stripped_" + name + "_wood"))
+            .value(Motherlode.id(id, name -> name + "_log"))
+            .value(Motherlode.id(id, name -> "stripped_" + name + "_log"))
+            .value(Motherlode.id(id, name -> name + "_wood"))
+            .value(Motherlode.id(id, name -> "stripped_" + name + "_wood"))
         ).accept(pack, Motherlode.id(id, name -> id.getPath() + "_logs"));
 
         CommonData.BLOCK_TAG_INCLUDE.apply(new Identifier("minecraft", "logs_that_burn")).accept(pack, Motherlode.id(id, name -> name + "_logs"));

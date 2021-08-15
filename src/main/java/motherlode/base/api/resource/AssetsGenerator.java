@@ -5,7 +5,7 @@ import motherlode.base.api.resource.builder.ResourcePackBuilder;
 @FunctionalInterface
 public interface AssetsGenerator {
     /**
-     * This is called to register assets using Artifice.
+     * This is called to register assets.
      *
      * @param pack Resource pack builder to register assets to.
      */

@@ -4,8 +4,8 @@ import java.util.function.Function;
 import net.minecraft.util.Identifier;
 import motherlode.base.api.Motherlode;
 import motherlode.base.api.Processor;
-import com.swordglowsblue.artifice.api.builder.TypedJsonBuilder;
-import com.swordglowsblue.artifice.api.builder.data.TagBuilder;
+import motherlode.base.api.resource.builder.JsonBuilder;
+import motherlode.base.api.resource.builder.data.TagBuilder;
 
 public final class CommonData {
     public static final String COMMON_NAMESPACE = "c";
@@ -19,7 +19,7 @@ public final class CommonData {
                     .type(new Identifier("minecraft", "item"))
                     .name(id)
                 )
-                .condition(new Identifier("minecraft", "survives_explosion"), TypedJsonBuilder::build
+                .condition(new Identifier("minecraft", "survives_explosion"), JsonBuilder::build
                 )
             )
         );
