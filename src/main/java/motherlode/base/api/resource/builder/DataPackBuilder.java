@@ -14,6 +14,7 @@ import motherlode.base.api.resource.builder.data.recipe.StonecuttingRecipeBuilde
 /**
  * Passed to resource construction callbacks to register server-side resources.
  */
+@SuppressWarnings("UnusedReturnValue")
 public interface DataPackBuilder extends AssetPackBuilder {
     /**
      * Add an advancement with the given ID.

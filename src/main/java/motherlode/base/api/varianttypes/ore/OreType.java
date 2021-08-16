@@ -10,9 +10,9 @@ import motherlode.base.api.Motherlode;
 import motherlode.base.api.Registerable;
 import motherlode.base.api.resource.CommonAssets;
 import motherlode.base.api.resource.CommonData;
-import motherlode.base.api.resource.DataProcessor;
 import motherlode.base.api.resource.builder.DataPackBuilder;
 import motherlode.base.api.resource.builder.ResourcePackBuilder;
+import motherlode.base.api.resource.function.DataProcessor;
 import motherlode.base.api.varianttype.MotherlodeVariantType;
 
 /**

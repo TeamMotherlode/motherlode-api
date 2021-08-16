@@ -4,6 +4,7 @@ import motherlode.base.api.Processor;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 
+@SuppressWarnings("UnusedReturnValue")
 public interface JsonArrayBuilder {
     JsonArrayBuilder add(JsonElement value);
 
@@ -21,7 +22,12 @@ public interface JsonArrayBuilder {
 
     JsonArrayBuilder write(JsonArray target);
 
-    JsonArray build();
+    default JsonArray build() {
+        JsonArray array = new JsonArray();
+        this.write(array);
+
+        return array;
+    }
 
     default Resource<JsonArray> buildResource() {
         return new JsonResource<>(this.build());

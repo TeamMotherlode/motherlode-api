@@ -6,6 +6,7 @@ import motherlode.base.api.Motherlode;
 import motherlode.base.api.Processor;
 import motherlode.base.api.resource.builder.JsonBuilder;
 import motherlode.base.api.resource.builder.data.TagBuilder;
+import motherlode.base.api.resource.function.DataProcessor;
 
 public final class CommonData {
     public static final String COMMON_NAMESPACE = "c";

@@ -11,8 +11,8 @@ import net.minecraft.world.gen.feature.OreFeatureConfig;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.fabricmc.fabric.api.tool.attribute.v1.FabricToolTags;
 import motherlode.base.api.resource.CommonData;
-import motherlode.base.api.resource.DataProcessor;
 import motherlode.base.api.resource.builder.DataPackBuilder;
+import motherlode.base.api.resource.function.DataProcessor;
 
 public class MotherlodeOreBlock extends OreBlock implements DataProcessor {
     private static final UniformIntProvider NULL_INT_PROVIDER = UniformIntProvider.create(0, 0);

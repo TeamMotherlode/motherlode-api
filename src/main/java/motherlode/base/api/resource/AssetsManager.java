@@ -2,6 +2,10 @@ package motherlode.base.api.resource;
 
 import net.minecraft.util.Identifier;
 import motherlode.base.api.Motherlode;
+import motherlode.base.api.resource.function.AssetProcessor;
+import motherlode.base.api.resource.function.AssetsGenerator;
+import motherlode.base.api.resource.function.DataGenerator;
+import motherlode.base.api.resource.function.DataProcessor;
 
 /**
  * Assets and data can be registered using this interface.

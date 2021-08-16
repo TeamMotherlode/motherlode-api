@@ -6,6 +6,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
+@SuppressWarnings("UnusedReturnValue")
 public interface JsonBuilder {
     <J extends JsonElement> JsonBuilder with(String key, Supplier<J> json, Processor<J> run);
 
@@ -25,7 +26,12 @@ public interface JsonBuilder {
 
     JsonBuilder write(JsonObject target);
 
-    JsonObject build();
+    default JsonObject build() {
+        JsonObject object = new JsonObject();
+        this.write(object);
+
+        return object;
+    }
 
     default Resource<JsonObject> buildResource() {
         return new JsonResource<>(this.build());
@@ -48,10 +54,10 @@ public interface JsonBuilder {
         return array;
     }
 
-    static JsonArray arrayOf(Character... values) {
+    static JsonArray arrayOf(char... values) {
         JsonArray array = new JsonArray();
 
-        for (Character i : values) array.add(i);
+        for (char i : values) array.add(i);
 
         return array;
     }

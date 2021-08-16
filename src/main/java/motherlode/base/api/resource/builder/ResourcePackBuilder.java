@@ -15,6 +15,7 @@ import motherlode.base.api.resource.builder.assets.TranslationBuilder;
  * Passed to resource construction callbacks to register client-side resources.
  */
 @Environment(EnvType.CLIENT)
+@SuppressWarnings("UnusedReturnValue")
 public interface ResourcePackBuilder extends AssetPackBuilder {
     /**
      * Add an item model for the given item ID.

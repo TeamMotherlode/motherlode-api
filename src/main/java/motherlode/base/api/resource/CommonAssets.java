@@ -6,6 +6,7 @@ import net.minecraft.util.Identifier;
 import motherlode.base.api.Motherlode;
 import motherlode.base.api.resource.builder.assets.BlockStateBuilder;
 import motherlode.base.api.resource.builder.assets.ModelBuilder;
+import motherlode.base.api.resource.function.AssetProcessor;
 import com.google.gson.JsonObject;
 
 public final class CommonAssets {
