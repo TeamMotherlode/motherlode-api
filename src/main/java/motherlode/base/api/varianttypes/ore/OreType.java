@@ -8,11 +8,12 @@ import net.minecraft.item.ItemGroup;
 import net.minecraft.util.Identifier;
 import motherlode.base.api.Motherlode;
 import motherlode.base.api.Registerable;
-import motherlode.base.api.assets.CommonAssets;
-import motherlode.base.api.assets.CommonData;
-import motherlode.base.api.assets.DataProcessor;
+import motherlode.base.api.resource.CommonAssets;
+import motherlode.base.api.resource.CommonData;
+import motherlode.base.api.resource.builder.DataPackBuilder;
+import motherlode.base.api.resource.builder.ResourcePackBuilder;
+import motherlode.base.api.resource.function.DataProcessor;
 import motherlode.base.api.varianttype.MotherlodeVariantType;
-import com.swordglowsblue.artifice.api.ArtificeResourcePack;
 
 /**
  * Variant type that adds blocks and items for an overworld ore type.
@@ -96,14 +97,14 @@ public class OreType extends MotherlodeVariantType<Object, OreType> {
     }
 
     @Override
-    public void accept(ArtificeResourcePack.ClientResourcePackBuilder pack, Identifier id) {
+    public void accept(ResourcePackBuilder pack, Identifier id) {
         CommonAssets.DEFAULT_BLOCK.accept(pack, Motherlode.id(id, name -> name + "_ore"));
         CommonAssets.DEFAULT_BLOCK.accept(pack, Motherlode.id(id, name -> "deepslate_" + name + "_ore"));
         CommonAssets.DEFAULT_ITEM_MODEL.accept(pack, Motherlode.id(this.getBaseId(), name -> this.materialName));
     }
 
     @Override
-    public void accept(ArtificeResourcePack.ServerResourcePackBuilder pack, Identifier id) {
+    public void accept(DataPackBuilder pack, Identifier id) {
         Identifier oresTagId = new Identifier(CommonData.COMMON_NAMESPACE, id.getPath() + "_ores");
         Identifier stoneOreId = Motherlode.id(id, name -> name + "_ore");
         Identifier deepslateOreId = Motherlode.id(id, name -> "deepslate_" + name + "_ore");

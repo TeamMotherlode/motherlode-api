@@ -1,10 +1,10 @@
-package motherlode.base.impl.assets;
+package motherlode.base.impl.resource;
 
 import java.util.ArrayList;
 import java.util.List;
-import motherlode.base.api.assets.AssetsGenerator;
-import motherlode.base.api.assets.AssetsManager;
-import motherlode.base.api.assets.DataGenerator;
+import motherlode.base.api.resource.AssetsManager;
+import motherlode.base.api.resource.function.AssetsGenerator;
+import motherlode.base.api.resource.function.DataGenerator;
 
 public class AssetsManagerImpl implements AssetsManager {
     public static final AssetsManagerImpl INSTANCE = new AssetsManagerImpl();

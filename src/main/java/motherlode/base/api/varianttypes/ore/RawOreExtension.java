@@ -7,11 +7,12 @@ import net.minecraft.item.ItemGroup;
 import net.minecraft.util.Identifier;
 import motherlode.base.api.Motherlode;
 import motherlode.base.api.Registerable;
-import motherlode.base.api.assets.CommonAssets;
-import motherlode.base.api.assets.CommonData;
+import motherlode.base.api.resource.CommonAssets;
+import motherlode.base.api.resource.CommonData;
+import motherlode.base.api.resource.builder.DataPackBuilder;
+import motherlode.base.api.resource.builder.JsonBuilder;
+import motherlode.base.api.resource.builder.ResourcePackBuilder;
 import motherlode.base.api.varianttype.MotherlodeVariantType;
-import com.swordglowsblue.artifice.api.ArtificeResourcePack;
-import com.swordglowsblue.artifice.api.builder.TypedJsonBuilder;
 
 public class RawOreExtension implements MotherlodeVariantType.Extension<Object, OreType> {
     private Item rawOreItem;
@@ -30,13 +31,13 @@ public class RawOreExtension implements MotherlodeVariantType.Extension<Object, 
     }
 
     @Override
-    public void accept(ArtificeResourcePack.ClientResourcePackBuilder pack, Identifier id) {
+    public void accept(ResourcePackBuilder pack, Identifier id) {
         CommonAssets.DEFAULT_ITEM_MODEL.accept(pack, Motherlode.id(id, name -> "raw_" + name));
         CommonAssets.DEFAULT_BLOCK.accept(pack, Motherlode.id(id, name -> "raw_" + name + "_block"));
     }
 
     @Override
-    public void accept(ArtificeResourcePack.ServerResourcePackBuilder pack, Identifier id) {
+    public void accept(DataPackBuilder pack, Identifier id) {
         Identifier rawItemId = Motherlode.id(id, name -> "raw_" + name);
         Identifier rawBlockId = Motherlode.id(id, name -> "raw_" + name + "_block");
         Identifier stoneOreId = Motherlode.id(id, name -> name + "_ore");
@@ -52,7 +53,7 @@ public class RawOreExtension implements MotherlodeVariantType.Extension<Object, 
                     .type(new Identifier("minecraft", "item"))
                     .name(rawItemId)
                 )
-                .condition(new Identifier("minecraft", "survives_explosion"), TypedJsonBuilder::build)
+                .condition(new Identifier("minecraft", "survives_explosion"), JsonBuilder::build)
             )
         );
 
@@ -64,7 +65,7 @@ public class RawOreExtension implements MotherlodeVariantType.Extension<Object, 
                     .type(new Identifier("minecraft", "item"))
                     .name(rawItemId)
                 )
-                .condition(new Identifier("minecraft", "survives_explosion"), TypedJsonBuilder::build)
+                .condition(new Identifier("minecraft", "survives_explosion"), JsonBuilder::build)
             )
         );
 

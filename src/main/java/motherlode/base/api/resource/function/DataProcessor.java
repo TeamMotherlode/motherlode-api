@@ -1,18 +1,18 @@
-package motherlode.base.api.assets;
+package motherlode.base.api.resource.function;
 
 import java.util.Objects;
 import net.minecraft.util.Identifier;
-import com.swordglowsblue.artifice.api.ArtificeResourcePack;
+import motherlode.base.api.resource.builder.DataPackBuilder;
 
 @FunctionalInterface
 public interface DataProcessor {
     /**
-     * This is called to register data using Artifice.
+     * This is called to register data.
      *
      * @param pack Data pack builder to register data to.
      * @param id   Identifier passed together with the {@code DataProcessor}.
      */
-    void accept(ArtificeResourcePack.ServerResourcePackBuilder pack, Identifier id);
+    void accept(DataPackBuilder pack, Identifier id);
 
     /**
      * Calls the {@link #accept} method and returns the given data pack builder.
@@ -21,9 +21,8 @@ public interface DataProcessor {
      * @param id   Identifier passed together with the {@code DataProcessor}.
      * @return The given data pack builder.
      */
-    default ArtificeResourcePack.ServerResourcePackBuilder process(ArtificeResourcePack.ServerResourcePackBuilder pack, Identifier id) {
-
-        accept(pack, id);
+    default DataPackBuilder process(DataPackBuilder pack, Identifier id) {
+        this.accept(pack, id);
         return pack;
     }
 
@@ -37,7 +36,6 @@ public interface DataProcessor {
         Objects.requireNonNull(before);
 
         return (pack, id) -> {
-
             before.accept(pack, id);
             this.accept(pack, id);
         };
@@ -53,7 +51,6 @@ public interface DataProcessor {
         Objects.requireNonNull(after);
 
         return (pack, id) -> {
-
             this.accept(pack, id);
             after.accept(pack, id);
         };

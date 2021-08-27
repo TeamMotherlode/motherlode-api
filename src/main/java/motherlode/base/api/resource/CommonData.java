@@ -1,11 +1,16 @@
-package motherlode.base.api.assets;
+package motherlode.base.api.resource;
 
 import java.util.function.Function;
 import net.minecraft.util.Identifier;
 import motherlode.base.api.Motherlode;
-import com.swordglowsblue.artifice.api.builder.TypedJsonBuilder;
+import motherlode.base.api.Processor;
+import motherlode.base.api.resource.builder.JsonBuilder;
+import motherlode.base.api.resource.builder.data.TagBuilder;
+import motherlode.base.api.resource.function.DataProcessor;
 
 public final class CommonData {
+    public static final String COMMON_NAMESPACE = "c";
+
     public static final DataProcessor DEFAULT_BLOCK_LOOT_TABLE = (pack, id) ->
         pack.addLootTable(Motherlode.id(id, name -> "blocks/" + name), table -> table
             .type(new Identifier("minecraft", "block"))
@@ -15,12 +20,10 @@ public final class CommonData {
                     .type(new Identifier("minecraft", "item"))
                     .name(id)
                 )
-                .condition(new Identifier("minecraft", "survives_explosion"), TypedJsonBuilder::build
+                .condition(new Identifier("minecraft", "survives_explosion"), JsonBuilder::build
                 )
             )
         );
-
-    public static final String COMMON_NAMESPACE = "c";
 
     public static final Function<Identifier, DataProcessor> ITEM_TAG = tagId -> (pack, id) ->
         pack.addItemTag(tagId, tag -> tag
@@ -41,4 +44,15 @@ public final class CommonData {
         pack.addBlockTag(tagId, tag -> tag
             .replace(false)
             .include(id)));
+
+    private CommonData() {
+    }
+
+    public static DataProcessor itemTag(Processor<TagBuilder> values) {
+        return (pack, id) -> pack.addItemTag(id, tag -> values.accept(tag.replace(false)));
+    }
+
+    public static DataProcessor blockTag(Processor<TagBuilder> values) {
+        return itemTag(values).after((pack, id) -> pack.addBlockTag(id, tag -> values.accept(tag.replace(false))));
+    }
 }
