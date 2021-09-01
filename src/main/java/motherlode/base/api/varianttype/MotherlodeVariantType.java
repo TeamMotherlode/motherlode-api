@@ -37,23 +37,23 @@ public abstract class MotherlodeVariantType<S extends MotherlodeVariantType<S>> 
     }
 
     public static <S extends AbstractExtendableVariantType<S>, E extends ExtendableVariantType.Extension<S>> E extend(S variantType, String namespace, E extension) {
-        variantType.withNamespace(namespace).with(extension).register();
+        variantType.extend(extension, namespace).register();
         return extension;
     }
 
-    public static <S extends AbstractExtendableVariantType<S>, E extends ExtendableVariantType.Extension<S>> Optional<E> conditionallyExtend(BooleanSupplier condition, S variantType, String namespace, Supplier<E> extensionFunction) {
-        return conditionallyExtend(condition.getAsBoolean(), variantType, namespace, extensionFunction);
+    public static <S extends AbstractExtendableVariantType<S>, E extends ExtendableVariantType.Extension<S>> Optional<E> extendConditionally(BooleanSupplier condition, S variantType, String namespace, Supplier<E> extensionFunction) {
+        return extendConditionally(condition.getAsBoolean(), variantType, namespace, extensionFunction);
     }
 
-    public static <S extends AbstractExtendableVariantType<S>, E extends ExtendableVariantType.Extension<S>> Optional<E> conditionallyExtend(boolean condition, S variantType, String namespace, Supplier<E> extensionFunction) {
-        return conditionallyExtend(condition, (Supplier<S>) () -> variantType, namespace, extensionFunction);
+    public static <S extends AbstractExtendableVariantType<S>, E extends ExtendableVariantType.Extension<S>> Optional<E> extendConditionally(boolean condition, S variantType, String namespace, Supplier<E> extensionFunction) {
+        return extendConditionally(condition, (Supplier<S>) () -> variantType, namespace, extensionFunction);
     }
 
-    public static <S extends AbstractExtendableVariantType<S>, E extends ExtendableVariantType.Extension<S>> Optional<E> conditionallyExtend(BooleanSupplier condition, Supplier<S> variantType, String namespace, Supplier<E> extensionFunction) {
-        return conditionallyExtend(condition.getAsBoolean(), variantType, namespace, extensionFunction);
+    public static <S extends AbstractExtendableVariantType<S>, E extends ExtendableVariantType.Extension<S>> Optional<E> extendConditionally(BooleanSupplier condition, Supplier<S> variantType, String namespace, Supplier<E> extensionFunction) {
+        return extendConditionally(condition.getAsBoolean(), variantType, namespace, extensionFunction);
     }
 
-    public static <S extends AbstractExtendableVariantType<S>, E extends ExtendableVariantType.Extension<S>> Optional<E> conditionallyExtend(boolean condition, Supplier<S> variantType, String namespace, Supplier<E> extensionFunction) {
+    public static <S extends AbstractExtendableVariantType<S>, E extends ExtendableVariantType.Extension<S>> Optional<E> extendConditionally(boolean condition, Supplier<S> variantType, String namespace, Supplier<E> extensionFunction) {
         E extension = condition ? extensionFunction.get() : null;
         (condition ? Optional.of(variantType.get()) : Optional.<S>empty())
             .map(v -> v.withNamespace(namespace)).map(type -> type.with(extension));
