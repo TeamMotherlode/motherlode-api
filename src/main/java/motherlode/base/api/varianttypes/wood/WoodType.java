@@ -39,7 +39,7 @@ import motherlode.base.mixin.BlocksAccessor;
 /**
  * Variant type that adds blocks required for an overworld wood type.
  */
-public class WoodType extends MotherlodeVariantType<Block, WoodType> {
+public class WoodType extends MotherlodeVariantType<WoodType> {
     private static final Item.Settings BUILDING_BLOCKS = new Item.Settings().group(ItemGroup.BUILDING_BLOCKS);
     private static final Item.Settings REDSTONE = new Item.Settings().group(ItemGroup.REDSTONE);
     private static final Item.Settings DECORATIONS = new Item.Settings().group(ItemGroup.DECORATIONS);
@@ -185,11 +185,6 @@ public class WoodType extends MotherlodeVariantType<Block, WoodType> {
 
     public FlowerPotBlock getPottedSapling() {
         return this.pottedSapling;
-    }
-
-    @Override
-    protected Block[] baseVariants() {
-        return new Block[] { this.log, this.strippedLog, this.wood, this.strippedWood, this.planks, this.button, this.fence, this.fenceGate, this.pressurePlate, this.leaves, this.sapling, this.pottedSapling };
     }
 
     @Override

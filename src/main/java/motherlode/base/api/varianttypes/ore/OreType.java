@@ -18,7 +18,7 @@ import motherlode.base.api.varianttype.MotherlodeVariantType;
 /**
  * Variant type that adds blocks and items for an overworld ore type.
  */
-public class OreType extends MotherlodeVariantType<Object, OreType> {
+public class OreType extends MotherlodeVariantType<OreType> {
     public static final OreType IRON = new OreType(new Identifier("minecraft", "iron"), Blocks.IRON_ORE, Blocks.DEEPSLATE_IRON_ORE).withoutBase().register();
     public static final OreType COAL = new OreType(new Identifier("minecraft", "coal"), Blocks.COAL_ORE, Blocks.DEEPSLATE_COAL_ORE, "coal").withoutBase().register();
     public static final OreType COPPER = new OreType(new Identifier("minecraft", "copper"), Blocks.COPPER_ORE, Blocks.DEEPSLATE_COPPER_ORE).withoutBase().register();
@@ -89,11 +89,6 @@ public class OreType extends MotherlodeVariantType<Object, OreType> {
 
     public OreType oresDropThemselves() {
         return this.with(new OreDropsExtension(OreDropsExtension.Drop.THEMSELVES));
-    }
-
-    @Override
-    protected Object[] baseVariants() {
-        return new Object[] { this.stoneOreBlock, this.deepslateOreBlock, this.material };
     }
 
     @Override

@@ -14,7 +14,7 @@ import motherlode.base.api.resource.builder.JsonBuilder;
 import motherlode.base.api.resource.builder.ResourcePackBuilder;
 import motherlode.base.api.varianttype.MotherlodeVariantType;
 
-public class RawOreExtension implements MotherlodeVariantType.Extension<Object, OreType> {
+public class RawOreExtension implements MotherlodeVariantType.Extension<OreType> {
     private Item rawOreItem;
     private Block rawOreBlock;
     private String materialName;
@@ -109,10 +109,5 @@ public class RawOreExtension implements MotherlodeVariantType.Extension<Object, 
 
     public Block getRawOreBlock() {
         return this.rawOreBlock;
-    }
-
-    @Override
-    public Object[] variants() {
-        return new Object[] { this.rawOreItem, this.rawOreBlock };
     }
 }
