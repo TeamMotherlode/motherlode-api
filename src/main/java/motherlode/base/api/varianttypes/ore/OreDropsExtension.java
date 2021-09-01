@@ -8,7 +8,7 @@ import motherlode.base.api.resource.builder.JsonBuilder;
 import motherlode.base.api.resource.builder.ResourcePackBuilder;
 import motherlode.base.api.varianttype.MotherlodeVariantType;
 
-public class OreDropsExtension implements MotherlodeVariantType.Extension<Object, OreType> {
+public class OreDropsExtension implements MotherlodeVariantType.Extension<OreType> {
     private final Drop drop;
     private String materialName;
 
@@ -73,11 +73,6 @@ public class OreDropsExtension implements MotherlodeVariantType.Extension<Object
 
     @Override
     public void registerOnClient(Identifier id) {
-    }
-
-    @Override
-    public Object[] variants() {
-        return new Object[0];
     }
 
     enum Drop {

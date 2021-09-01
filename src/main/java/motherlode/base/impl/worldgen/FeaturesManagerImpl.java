@@ -1,4 +1,4 @@
-package motherlode.base.impl;
+package motherlode.base.impl.worldgen;
 
 import java.util.ArrayList;
 import java.util.List;

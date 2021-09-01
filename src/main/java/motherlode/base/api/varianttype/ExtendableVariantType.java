@@ -7,21 +7,20 @@ import net.minecraft.util.Identifier;
 /**
  * JavaDoc planned.
  *
- * @param <T>
  * @param <S>
  */
-public interface ExtendableVariantType<T, S extends ExtendableVariantType<T, S>> extends VariantType<T> {
+public interface ExtendableVariantType<S extends ExtendableVariantType<S>> {
     S register();
 
     S withoutBase();
 
-    S with(Extension<T, S> extension);
+    S with(Extension<S> extension);
 
-    S conditionallyWith(boolean condition, Supplier<Extension<T, S>> extension);
+    S conditionallyWith(boolean condition, Supplier<Extension<S>> extension);
 
-    S conditionallyWith(BooleanSupplier condition, Supplier<Extension<T, S>> extension);
+    S conditionallyWith(BooleanSupplier condition, Supplier<Extension<S>> extension);
 
-    interface Extension<T, V extends ExtendableVariantType<T, V>> extends VariantType<T> {
+    interface Extension<V extends ExtendableVariantType<V>> {
         void registerExtension(Identifier id, V variantType);
 
         default void register(Identifier id, V variantType) {
