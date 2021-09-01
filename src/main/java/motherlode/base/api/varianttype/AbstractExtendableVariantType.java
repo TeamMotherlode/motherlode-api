@@ -33,7 +33,9 @@ public abstract class AbstractExtendableVariantType<S extends AbstractExtendable
     }
 
     /**
-     * {@return this}
+     * Returns {@code this}.
+     *
+     * @return this
      */
     protected abstract S getThis();
 
