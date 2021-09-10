@@ -26,6 +26,7 @@ import motherlode.base.impl.resource.builder.adapter.artifice.assets.ArtificeRes
 import motherlode.base.impl.resource.builder.adapter.artifice.data.ArtificeDataPackBuilderAdapter;
 import motherlode.base.util.ConfigUtilities;
 import com.mojang.serialization.Codec;
+import com.mojang.serialization.JsonOps;
 import com.swordglowsblue.artifice.api.Artifice;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
@@ -448,14 +449,14 @@ public final class Motherlode implements ModInitializer {
      * This will also get logged.
      *
      * @param codec       The {@link Codec} of the config object.
-     * @param module      The name of the module, which will be used as the name of the config file
-     *                    and for logging.
+     * @param name        The mod ID of the module, which is used as the file name.
+     * @param module      The name of the module, used as a prefix in logging.
      * @param alternative A default config object to be used if the config file could not be found and decoded.
      * @param <T>         The type of the config object.
      * @return The config object if the file could be read and decoded, or the default one.
      */
-    public static <T> T loadConfig(Codec<T> codec, String module, T alternative) {
-        return ConfigUtilities.loadConfig(codec, resolveConfigPath(getJsonPath(module)), alternative,
+    public static <T> T loadConfig(Codec<T> codec, String name, String module, T alternative) {
+        return ConfigUtilities.loadConfig(codec, resolveConfigPath(getJsonPath(name)), alternative, JsonOps.INSTANCE,
             (level, message) -> log(level, module, message));
     }
 
@@ -464,13 +465,13 @@ public final class Motherlode implements ModInitializer {
      * This will also get logged.
      *
      * @param codec  The {@link Codec} of the config object.
-     * @param module The name of the module, which will be used as the name of the config file
-     *               and for logging.
+     * @param name   The mod ID of the module, which is used as the file name.
+     * @param module The name of the module, used as a prefix in logging.
      * @param <T>    The type of the config object.
      * @return The config object if the file could be read and decoded, or an empty {@link Optional}
      */
-    public static <T> Optional<T> loadConfig(Codec<T> codec, String module) {
-        return ConfigUtilities.loadConfig(codec, resolveConfigPath(getJsonPath(module)),
+    public static <T> Optional<T> loadConfig(Codec<T> codec, String name, String module) {
+        return ConfigUtilities.loadConfig(codec, resolveConfigPath(getJsonPath(name)), JsonOps.INSTANCE,
             (level, message) -> log(level, module, message));
     }
 
