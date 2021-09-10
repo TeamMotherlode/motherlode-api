@@ -2,11 +2,15 @@ package motherlode.base.api;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
+import java.util.Optional;
 import java.util.function.Consumer;
 import java.util.function.UnaryOperator;
 import net.minecraft.util.Identifier;
 import net.fabricmc.api.ModInitializer;
+import net.fabricmc.loader.api.FabricLoader;
 import motherlode.base.MotherlodeBase;
 import motherlode.base.api.resource.AssetsManager;
 import motherlode.base.api.resource.function.AssetProcessor;
@@ -20,6 +24,9 @@ import motherlode.base.impl.ServerRegisterImpl;
 import motherlode.base.impl.resource.AssetsManagerImpl;
 import motherlode.base.impl.resource.builder.adapter.artifice.assets.ArtificeResourceBuilderAdapter;
 import motherlode.base.impl.resource.builder.adapter.artifice.data.ArtificeDataPackBuilderAdapter;
+import motherlode.base.util.ConfigUtilities;
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.JsonOps;
 import com.swordglowsblue.artifice.api.Artifice;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
@@ -435,6 +442,57 @@ public final class Motherlode implements ModInitializer {
         if (MotherlodeBase.isModuleInitializationDone())
             throw new IllegalStateException("Trying to add data outside motherlode:init entry point.");
         return FeaturesManagerImpl.INSTANCE;
+    }
+
+    /**
+     * Tries to read a config file with the module's name, and writes a default config file if none could be found.
+     * This will also get logged.
+     *
+     * @param codec       The {@link Codec} of the config object.
+     * @param name        The mod ID of the module, which is used as the file name.
+     * @param module      The name of the module, used as a prefix in logging.
+     * @param alternative A default config object to be used if the config file could not be found and decoded.
+     * @param <T>         The type of the config object.
+     * @return The config object if the file could be read and decoded, or the default one.
+     */
+    public static <T> T loadConfig(Codec<T> codec, String name, String module, T alternative) {
+        return ConfigUtilities.loadConfig(codec, resolveConfigPath(getJsonPath(name)), alternative, JsonOps.INSTANCE,
+            (level, message) -> log(level, module, message));
+    }
+
+    /**
+     * Tries to read a config file with the module's name.
+     * This will also get logged.
+     *
+     * @param codec  The {@link Codec} of the config object.
+     * @param name   The mod ID of the module, which is used as the file name.
+     * @param module The name of the module, used as a prefix in logging.
+     * @param <T>    The type of the config object.
+     * @return The config object if the file could be read and decoded, or an empty {@link Optional}
+     */
+    public static <T> Optional<T> loadConfig(Codec<T> codec, String name, String module) {
+        return ConfigUtilities.loadConfig(codec, resolveConfigPath(getJsonPath(name)), JsonOps.INSTANCE,
+            (level, message) -> log(level, module, message));
+    }
+
+    /**
+     * Creates a {@link Path} with {@code .json} as its file extension.
+     *
+     * @param name The name of the file.
+     * @return the created {@code Path}
+     */
+    public static Path getJsonPath(String name) {
+        return Paths.get(name + ".json");
+    }
+
+    /**
+     * Resolves the passed {@link Path} relative to the config directory.
+     *
+     * @param configPath The path relative to the config directory.
+     * @return the new {@code Path}
+     */
+    public static Path resolveConfigPath(Path configPath) {
+        return FabricLoader.getInstance().getConfigDir().resolve(configPath);
     }
 
     /**
